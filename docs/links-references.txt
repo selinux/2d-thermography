@@ -1,1 +1,3 @@
 http://bildr.org/2011/02/mlx90614-arduino/
+
+http://wiki.iteadstudio.com/Arduino_Dual_Step_Motor_Driver_Shield
