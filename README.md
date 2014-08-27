@@ -16,19 +16,23 @@ will be done by octave.
 hardware :
 --
 
+    - arduino
     - 2 cd stepper
-    - MLX90614ESF-DCI
+    - MLX90614ESF-DCI  3V (also available in 5V)
     - a laser pointer
-    - 2 Pololu A4988 or ITEAD Dual Step Motor Driver Shield
+    - ITEAD Dual Step Motor Driver Shield
+        (I tryed with Pololu but motors VDD must be > 8V
+         to work and cd motor's I use support only 4-6V )
+    - 2 mechanic endstop
 
 
 
 BOM :
 --
 
-http://shop.boxtec.ch/infrared-thermometer-sensor-medical-mlx90614esf-dci-p-40658.html
-http://www.aliexpress.com/snapshot/6167745304.html
-http://www.aliexpress.com/snapshot/6124275888.html
-http://imall.iteadstudio.com/im120417015.html
+* http://shop.boxtec.ch/infrared-thermometer-sensor-medical-mlx90614esf-dci-p-40658.html
+* http://www.aliexpress.com/snapshot/6167745304.html
+* http://www.aliexpress.com/snapshot/6124275888.html
+* http://imall.iteadstudio.com/im120417015.html
 
 
