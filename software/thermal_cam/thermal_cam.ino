@@ -18,6 +18,11 @@
 
 
 #include <i2cmaster.h>
+// Definition of interrupt names
+#include < avr/io.h >
+// ISR interrupt service routine
+#include < avr/interrupt.h >
+
 
 #define DIRECTION_X     true
 #define DIRECTION_Y     true
@@ -61,6 +66,11 @@ void setup()
       PORTD |= (1<<DIR_X);  // toggle high/low
   if( DIRECTION_Y )
       PORTD |= (1<<DIR_Y);  // toggle high/low
+
+  while(digitalRead(END_X) != HIGH ){
+      step(1, MOTX);
+      delay(4);
+  }
 
 }
 
@@ -165,4 +175,9 @@ long int readMLXtemperature(int TaTo) {
     
     
     return(lii*2-27315);
+}
+
+void blink()
+{
+  Serial.println("Hello world!");
 }
