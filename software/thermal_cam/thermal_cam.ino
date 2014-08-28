@@ -63,9 +63,8 @@ void setup()
 
 void loop(){
 
-    long int tpl;
 
-    if (a <  20){  //sweep 200 step in dir 1
+    if (a < 250){  //sweep 200 step in dir 1
     
         a++;
         PORTD |= (1<<STP_X);    // X step high
@@ -73,7 +72,10 @@ void loop(){
         delay(1);               
         PORTD &= ~(1<<STP_X);    // X step low
         PORTD &= ~(1<<STP_Y);
-        delay(6);              
+        delay(16);              
+//
+        readPoint();
+
     }else{
         PORTD &= ~(1<<DIR_X);    // toggle direction
         PORTD &= ~(1<<DIR_Y);
@@ -83,25 +85,33 @@ void loop(){
         delay(1);
         PORTD &= ~(1<<STP_X);    // X step low
         PORTD &= ~(1<<STP_Y);
-        delay(6);
+        delay(16);
+        readPoint();
     
-        if (a>40){    //sweep 200 in dir 2
+        if (a>500){    //sweep 200 in dir 2
             delay(1000);
             a = 0;
             PORTD ^= (1<<DIR_X);    // toggle direction
             PORTD ^= (1<<DIR_Y);
       
 
-            tpl = readMLXtemperature(0);
-            Serial.print("La temps est de : ");
-            Serial.print(tpl);
-            tpl = readMLXtemperature(1);
-            Serial.print(" ambient ");
-            Serial.print(tpl);
-            Serial.println("Fin du cycle");
-
         }
     }
+}
+
+void readPoint(){
+
+    long int tpl;
+
+    tpl = readMLXtemperature(0);
+    Serial.print("La temps est de : ");
+    Serial.print(tpl);
+    tpl = readMLXtemperature(1);
+    Serial.print(" ambient ");
+    Serial.println(tpl);
+    //Serial.println("Fin du cycle");
+
+
 }
 
 //****************************************************************
