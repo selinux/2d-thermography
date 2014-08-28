@@ -21,17 +21,21 @@
 
 #define DIRECTION_X     true
 #define DIRECTION_Y     true
-#define STP_X    2
-#define DIR_X    3
-#define MS1_X    4
-#define MS2_X    5
-#define STP_Y    6
-#define DIR_Y    7
-#define MS1_Y    8
-#define MS2_Y    9
+#define STP_X           2
+#define DIR_X           3
+#define MS1_X           4
+#define MS2_X           5
+#define STP_Y           6
+#define DIR_Y           7
+#define MS1_Y           8
+#define MS2_Y           9
 
-#define END_X    10
-#define END_Y    11
+#define END_X           10
+#define END_Y           11
+
+#define MOTX            0
+#define MOTY            1
+
 
 int a = 0;     //  gen counter
 
@@ -64,40 +68,66 @@ void setup()
 void loop(){
 
 
+    int errno;
+    
     if (a < 250){  //sweep 200 step in dir 1
     
         a++;
-        PORTD |= (1<<STP_X);    // X step high
-        PORTD |= (1<<STP_Y);
-        delay(1);               
-        PORTD &= ~(1<<STP_X);    // X step low
-        PORTD &= ~(1<<STP_Y);
-        delay(16);              
-//
+        errno = step(1, MOTX);
+        delay(6);              
         readPoint();
 
     }else{
-        PORTD &= ~(1<<DIR_X);    // toggle direction
-        PORTD &= ~(1<<DIR_Y);
-        a++;
-        PORTD |= (1<<STP_X);    // X step high
-        PORTD |= (1<<STP_Y);
-        delay(1);
-        PORTD &= ~(1<<STP_X);    // X step low
-        PORTD &= ~(1<<STP_Y);
-        delay(16);
-        readPoint();
+       a++;
+        errno = step(-1, MOTX);
+        delay(6);
+//        readPoint();
     
         if (a>500){    //sweep 200 in dir 2
+
             delay(1000);
             a = 0;
-            PORTD ^= (1<<DIR_X);    // toggle direction
-            PORTD ^= (1<<DIR_Y);
-      
 
         }
     }
 }
+
+/*  move the motor 0 or 1 (X/Y)
+ *  int nb = signed number of step (sign = direction )
+ */
+int step( int nb, byte motor ){
+
+   if( motor == MOTX ){     
+
+       /* toggle direction */
+       if( nb > 0 && DIRECTION_X)
+           PORTD |= (1<<DIR_X);    
+       else
+           PORTD &= ~(1<<DIR_X);    // toggle direction
+
+       PORTD |= (1<<STP_X);    // X step high
+       delay(1);               
+       PORTD &= ~(1<<STP_X);    // X step low
+
+   }else if( motor == MOTY){
+
+       /* toggle direction */
+       if( nb > 0 && DIRECTION_Y)
+           PORTD |= (1<<DIR_Y);    
+       else
+           PORTD &= ~(1<<DIR_Y);    // toggle direction
+
+       PORTD |= (1<<STP_Y);    // X step high
+       delay(1);               
+       PORTD &= ~(1<<STP_Y);    // X step low
+
+   }else{
+       return 1;
+   }
+
+   return 0;
+}
+
 
 void readPoint(){
 
