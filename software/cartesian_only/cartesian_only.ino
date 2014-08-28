@@ -38,13 +38,18 @@ int a = 0;     //  gen counter
 void setup() 
 {            
   Serial.begin(115200);
-  Serial.println("Init MLX90614 temperature Sensor");
+  
+//  pinMode(STP_X, OUTPUT);       
+//  pinMode(DIR_X, OUTPUT);
+//  pinMode(MS1_X, OUTPUT);
+//  pinMode(MS2_X, OUTPUT);
+//  pinMode(STP_Y, OUTPUT);       
+//  pinMode(DIR_Y, OUTPUT);
+//  pinMode(MS1_Y, OUTPUT);
+//  pinMode(MS2_Y, OUTPUT);
+//  pinMode(END_X, INPUT);
+//  pinMode(END_Y, INPUT);
 
-  PORTC = (1 << PORTC4) | (1 << PORTC5);  //enable internal pullup resistors on i2c ports
-
-  Serial.println("Init motors");
-  /* init motors 
-   * *****************/
   DDRD = B11111100;         // set pins 2-7 as OUTPUT
   DDRB = B00001111;         // set pins 8-11 as OUTPUT
 
@@ -54,17 +59,14 @@ void setup()
   PORTB = B00110000;        // pins 8,9 HIGH (1/8 Y step)
 
   if( DIRECTION_X )
-      PORTD |= (1<<DIR_X);  // toggle high/low
+      PORTD |= (1<<DIR_X);
   if( DIRECTION_Y )
-      PORTD |= (1<<DIR_Y);  // toggle high/low
+      PORTD |= (1<<DIR_Y);
 
 }
 
 
 void loop(){
-
-    long int tpl;
-
     if (a <  20){  //sweep 200 step in dir 1
     
         a++;
@@ -91,38 +93,7 @@ void loop(){
             PORTD ^= (1<<DIR_X);    // toggle direction
             PORTD ^= (1<<DIR_Y);
       
-
-            tpl = readMLXtemperature(0);
-            Serial.print("La temps est de : ");
-            Serial.print(tpl);
-            tpl = readMLXtemperature(1);
-            Serial.print(" ambient ");
-            Serial.print(tpl);
             Serial.println("Fin du cycle");
-
         }
     }
-}
-
-//****************************************************************
-// read MLX90614 i2c ambient or object temperature
-long int readMLXtemperature(int TaTo) {
-    long int lii = 0;
-    int dlsb,dmsb,pec;
-    int dev = 0x5A<<1;
-
-    i2c_init();
-    i2c_start_wait(dev+I2C_WRITE);  // set device address and write mode
-
-    (TaTo)? i2c_write(0x06) : i2c_write(0x07);                // or command read object or ambient temperature
-    i2c_rep_start(dev+I2C_READ);    // set device address and read mode
-    dlsb = i2c_readAck();           // read data lsb
-    dmsb = i2c_readAck();           // read data msb
-    pec = i2c_readNak();
-    i2c_stop();
-
-    lii=dmsb*0x100+dlsb;
-    
-    
-    return(lii*2-27315);
 }
