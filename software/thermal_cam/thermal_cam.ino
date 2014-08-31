@@ -26,14 +26,14 @@
 
 #define DIRECTION_X     true
 #define DIRECTION_Y     true
-#define STP_X           6
-#define DIR_X           7
-#define MS1_X           8
-#define MS2_X           9
-#define STP_Y           2
-#define DIR_Y           3
-#define MS1_Y           4
-#define MS2_Y           5
+#define STP_X           2
+#define DIR_X           3
+#define MS1_X           4
+#define MS2_X           5
+#define STP_Y           6
+#define DIR_Y           7
+#define MS1_Y           8
+#define MS2_Y           9
 
 #define END_X           10
 #define END_Y           11
@@ -56,12 +56,12 @@ void setup()
     /* init motors 
      * *****************/
     DDRD = B11111100;         // set pins 2-7 as OUTPUT
-    DDRB = B00001111;         // set pins 8-11 as OUTPUT
+    DDRB = B00000011;         // set pins 8-11 as OUTPUT
   
     /* Set micro stepping 
     * pins 4,5,8,9 HIGH (1/8 step) */
-//    PORTD = B00000011;        // pins 4,5 HIGH (1/8 X step)
-//    PORTB = B00110000;        // pins 8,9 HIGH (1/8 Y step)
+    PORTD = B00100000;        // pins 4,5 HIGH (1/8 X step)
+    PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
   
     if( DIRECTION_X )
         PORTD |= (1<<DIR_X);  // toggle high/low
@@ -77,20 +77,20 @@ void loop(){
 
     int errno;
     
-    if (a < 250){  //sweep 200 step in dir 1
+    if (a < 1000){  //sweep 200 step in dir 1
     
         a++;
         errno = step(1, MOTX);
-        delay(60);              
+        delay(1);              
         readPoint();
 
     }else{
        a++;
         errno = step(-1, MOTX);
-        delay(60);
+        delay(1);
 //        readPoint();
     
-        if (a>500){    //sweep 200 in dir 2
+        if (a>2000){    //sweep 200 in dir 2
 
             delay(1000);
             a = 0;
