@@ -25,7 +25,12 @@
 s0 = serial("/dev/ttyACM0", 115200)
 srl_flush(s0);
 
-% srl_write(s1, "Hello world!")
-data = srl_read(s0, 12)  
-# Convert uint8 array to string, 
-char(data)
+a = 0;
+
+while( a < 1000)
+  % srl_write(s1, "Hello world!")
+  data = srl_read(s0, 10);
+  # Convert uint8 array to string, 
+  char(data)
+  a++;
+endwhile

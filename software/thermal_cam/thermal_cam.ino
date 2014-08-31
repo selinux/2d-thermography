@@ -60,7 +60,7 @@ void setup()
   
     /* Set micro stepping 
     * pins 4,5,8,9 HIGH (1/8 step) */
-    PORTD = B00100000;        // pins 4,5 HIGH (1/8 X step)
+    PORTD = B00110000;        // pins 4,5 HIGH (1/8 X step)
     PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
   
     if( DIRECTION_X )
@@ -77,7 +77,7 @@ void loop(){
 
     int errno;
     
-    if (a < 1000){  //sweep 200 step in dir 1
+    if (a < 800){  //sweep 200 step in dir 1
     
         a++;
         errno = step(1, MOTX);
@@ -88,14 +88,14 @@ void loop(){
        a++;
         errno = step(-1, MOTX);
         delay(1);
-//        readPoint();
+        readPoint();
     
-        if (a>2000){    //sweep 200 in dir 2
+        if (a>1600){    //sweep 200 in dir 2
 
             delay(1000);
             a = 0;
             if(digitalRead(10) == HIGH)
-                Serial.println("Hello switch");
+                Serial.println("EndOfLine");
 
         }
     }
@@ -143,10 +143,10 @@ void readPoint(){
     long int tpl;
 
     tpl = readMLXtemperature(0);
-    Serial.print("La temps est de : ");
+    Serial.print("#");
     Serial.print(tpl);
     tpl = readMLXtemperature(1);
-    Serial.print(" ambient ");
+    Serial.print(",");
     Serial.println(tpl);
     //Serial.println("Fin du cycle");
 

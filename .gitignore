@@ -4,6 +4,8 @@ workspace/
 docs/datasheets/
 docs/pics/
 
+octave-workspace
+
 *.swp
 *.bak
 
