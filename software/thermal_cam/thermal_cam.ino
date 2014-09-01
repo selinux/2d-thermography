@@ -86,9 +86,9 @@ void loop(){
         errno = step(1*DIRECTION_X, MOTX); // -1*-1 = 1 et -1*1 = -1
         delay(1);              
 
-        PORTB |= (1<<5);  // set dir to HIGH
+//        PORTB |= (1<<5);  // set dir to HIGH
         readPoint();
-        PORTB &= ~(1<<5);
+//        PORTB &= ~(1<<5);
 
     }else{
        a++;
@@ -146,7 +146,9 @@ void readPoint(){
 
     long int tpl;
 
+    PORTB |= (1<<5);  // set dir to HIGH
     tpl = readMLXtemperature(0);
+    PORTB &= ~(1<<5);
     Serial.print("#");
     Serial.print(tpl);
     tpl = readMLXtemperature(1);
