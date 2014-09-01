@@ -56,7 +56,7 @@ void setup()
     /* init motors 
      * *****************/
     DDRD = B11111100;         // set pins 2-7 as OUTPUT
-    DDRB = B00000011;         // set pins 8-11 as OUTPUT
+    DDRB = B00010011;         // set pins 8-9 as OUTPUT
   
     /* Set micro stepping 
     * pins 4,5,8,9 HIGH (1/8 step) */
@@ -85,7 +85,10 @@ void loop(){
         a++;
         errno = step(1*DIRECTION_X, MOTX); // -1*-1 = 1 et -1*1 = -1
         delay(1);              
+
+        PORTB |= (1<<5);  // set dir to HIGH
         readPoint();
+        PORTB &= ~(1<<5);
 
     }else{
        a++;
