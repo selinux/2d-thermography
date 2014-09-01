@@ -24,8 +24,8 @@
 #include < avr/interrupt.h >
 
 
-#define DIRECTION_X     true
-#define DIRECTION_Y     true
+#define DIRECTION_X     1       // 1 or -1
+#define DIRECTION_Y     1       // 1 or -1
 #define STP_X           2
 #define DIR_X           3
 #define MS1_X           4
@@ -63,30 +63,33 @@ void setup()
     PORTD = B00110000;        // pins 4,5 HIGH (1/8 X step)
     PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
   
-    if( DIRECTION_X )
-        PORTD |= (1<<DIR_X);  // toggle high/low
-    if( DIRECTION_Y )
-        PORTD |= (1<<DIR_Y);  // toggle high/low
-
+    if( DIRECTION_X > 0 )
+        PORTD |= (1<<DIR_X);  // set dir to HIGH
+    if( DIRECTION_Y > 0 )
+        PORTD |= (1<<DIR_Y);  // set dir to HIGH
 
 }
 
 
 void loop(){
 
-
     int errno;
+//    int dirX = DIRECTION_X;
+//    int dirY = DIRECTION_Y;
+            if( digitalRead(END_X) == HIGH )
+                Serial.println("EndOfLine");
+
     
     if (a < 800){  //sweep 200 step in dir 1
     
         a++;
-        errno = step(1, MOTX);
+        errno = step(1*DIRECTION_X, MOTX); // -1*-1 = 1 et -1*1 = -1
         delay(1);              
         readPoint();
 
     }else{
        a++;
-        errno = step(-1, MOTX);
+        errno = step(-1*DIRECTION_X, MOTX);
         delay(1);
         readPoint();
     
@@ -94,8 +97,6 @@ void loop(){
 
             delay(1000);
             a = 0;
-            if(digitalRead(10) == HIGH)
-                Serial.println("EndOfLine");
 
         }
     }
@@ -109,7 +110,7 @@ int step( int nb, byte motor ){
    if( motor == MOTX ){     
 
        /* toggle direction */
-       if( nb > 0 && DIRECTION_X)
+       if( nb > 0 )
            PORTD |= (1<<DIR_X);    
        else
            PORTD &= ~(1<<DIR_X);    // toggle direction
@@ -121,7 +122,7 @@ int step( int nb, byte motor ){
    }else if( motor == MOTY){
 
        /* toggle direction */
-       if( nb > 0 && DIRECTION_Y)
+       if( nb > 0 )
            PORTD |= (1<<DIR_Y);    
        else
            PORTD &= ~(1<<DIR_Y);    // toggle direction
@@ -163,7 +164,7 @@ long int readMLXtemperature(int TaTo) {
     i2c_init();
     i2c_start_wait(dev+I2C_WRITE);  // set device address and write mode
 
-    (TaTo)? i2c_write(0x06) : i2c_write(0x07);                // or command read object or ambient temperature
+    (TaTo)? i2c_write(0x06) : i2c_write(0x07); // or command read object or ambient temperature
     i2c_rep_start(dev+I2C_READ);    // set device address and read mode
     dlsb = i2c_readAck();           // read data lsb
     dmsb = i2c_readAck();           // read data msb
@@ -173,7 +174,7 @@ long int readMLXtemperature(int TaTo) {
     lii=dmsb*0x100+dlsb;
     
     
-    return(lii*2-27315);
+    return(lii*2-27315);            // return degre*100 
 }
 
 void initPos(){
@@ -183,10 +184,12 @@ void initPos(){
     eX = digitalRead(END_X);
     eY = digitalRead(END_Y);
 
-    while(digitalRead(END_X) != HIGH ){
+    while( digitalRead(END_X) != HIGH ){
         step(1, MOTX);
         delay(4);
     }
+
+
 
 }
 
