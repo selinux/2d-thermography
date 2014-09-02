@@ -103,26 +103,28 @@ void loop(){
         for ( j=0; j < size_y; j++ ){
     
             for ( i=0; i < size_x; i++ ){
-                step(-1*DIRECTION_X, MOTX);
+                step(-1, MOTX);
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
                 Serial.print(",");
             }
     
             tpl = readMLXtemperature(1);
-            Serial.print(":");
-            Serial.print(tpl);
-            Serial.println(";");
+            //Serial.print(":");
+            Serial.println(tpl);
+            //Serial.println(";");
     
             // Go one line down (motor up)
-            step(1*DIRECTION_Y, MOTY);
+            step(-1, MOTY);
             // return to the begining of next line
-            step(1*DIRECTION_X, MOTX);
+            step(size_x, MOTX);
         }
     
         start_scan = false;
+
     }else{
         Serial.println("Scan termineted...");
+        start_scan = false;
     }
     
 }
