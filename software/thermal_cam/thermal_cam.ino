@@ -39,6 +39,13 @@
 
 int a = 0;     //  gen counter
 
+/* size to scan */
+int size_x = 40;
+int size_y = 20;
+
+boolean start_scan = false;
+
+
 void setup() 
 {            
 
@@ -68,35 +75,58 @@ void setup()
     if( DIRECTION_Y > 0 )
         PORTD |= (1<<DIR_Y);  // set dir to HIGH
 
-    initPos(0);
+   // initPos(0);
 
 }
 
 
 void loop(){
 
+    int i = 0;
+    int j = 0;
+    long int tpl;
+
+    int start_read = 0;
+
+    start_read = Serial.read();
+    if(start_read != 0)
+        start_scan = true;
+
+
+    if(start_scan == true){
+        Serial.println("start scan #");
+        // Go to upper line (to do so motor goes down)
+        step( (size_y/2)*DIRECTION_Y*-1, MOTY);
+        // Go to the beging of line 
+        step( (size_x/2)*DIRECTION_X, MOTX);
     
-//    if (a < 120){  //sweep 200 step in dir 1
-//    
-//        a++;
-//        step(1*DIRECTION_X, MOTX); // -1*-1 = 1 et -1*1 = -1
-//        delay(3);              
-//        readPoint();
-//
-//    }else{
-//       a++;
-//        step(-1*DIRECTION_X, MOTX);
-//        delay(3);
-//        readPoint();
-//    
-//        if (a>240){    //sweep 200 in dir 2
-//
-//            delay(1000);
-//            a = 0;
-//
-//        }
-//    }
+        for ( j=0; j < size_y; j++ ){
+    
+            for ( i=0; i < size_x; i++ ){
+                step(-1*DIRECTION_X, MOTX);
+                tpl = readMLXtemperature(0);
+                Serial.print(tpl);
+                Serial.print(",");
+            }
+    
+            tpl = readMLXtemperature(1);
+            Serial.print(":");
+            Serial.print(tpl);
+            Serial.println(";");
+    
+            // Go one line down (motor up)
+            step(1*DIRECTION_Y, MOTY);
+            // return to the begining of next line
+            step(1*DIRECTION_X, MOTX);
+        }
+    
+        start_scan = false;
+    }else{
+        Serial.println("Scan termineted...");
+    }
+    
 }
+
 
 /*  move the motor 0 or 1 (X/Y)
  *  int nb = signed number of step (sign = direction )
@@ -124,15 +154,20 @@ int step( int nb, byte motor ){
     }else if( motor == MOTY){
  
         /* toggle direction */
-        if( nb > 0 )
+        if( nb > 0 ){
             PORTD |= (1<<DIR_Y);    
-        else
+        }else{
             PORTD &= ~(1<<DIR_Y);    // toggle direction
+            nb *= -1;
+        }
  
-        PORTD |= (1<<STP_Y);    // X step high
-        delay(1);               
-        PORTD &= ~(1<<STP_Y);    // X step low
-        delay(1);               
+        for(i = 0; i <= nb; i++){
+            PORTD |= (1<<STP_Y);    // X step high
+            delay(1);               
+            PORTD &= ~(1<<STP_Y);    // X step low
+            delay(1);               
+        }
+        
  
     }else{
         return 1;
@@ -147,12 +182,12 @@ void readPoint(){
     long int tpl;
 
     tpl = readMLXtemperature(0);
-    Serial.print("#");
+//    Serial.print("#");
     Serial.print(tpl);
-    tpl = readMLXtemperature(1);
-    Serial.print(",");
-    Serial.println(tpl);
-    //Serial.println("Fin du cycle");
+//    tpl = readMLXtemperature(1);
+//    Serial.print(",");
+//    Serial.println(tpl);
+//    Serial.println("Fin du cycle");
 
 
 }
