@@ -18,11 +18,6 @@
 
 
 #include <i2cmaster.h>
-// Definition of interrupt names
-#include < avr/io.h >
-// ISR interrupt service routine
-#include < avr/interrupt.h >
-
 
 #define DIRECTION_X     1       // 1 or -1
 #define DIRECTION_Y     1       // 1 or -1
@@ -59,47 +54,48 @@ void setup()
     DDRB = B00000011;         // set pins 8-11 as OUTPUT
   
     /* Set micro stepping 
-    * pins 4,5,8,9 HIGH (1/8 step) */
-    PORTD = B00110000;        // pins 4,5 HIGH (1/8 X step)
-    PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
-  
+    * pins 4,5,8,9 HIGH (1/8 step) 
+    * MS1 = L, MS2 = L   >  Full step 
+    * MS1 = H, MS2 = L   >  Half step 
+    * MS1 = L, MS2 = H   >  Quarter step 
+    * MS1 = H, MS2 = H   >  Eighth step */
+    //PORTD = B00110000;        // pins 4,5 HIGH (1/8 X step)
+    //PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
+
+
     if( DIRECTION_X > 0 )
         PORTD |= (1<<DIR_X);  // set dir to HIGH
     if( DIRECTION_Y > 0 )
         PORTD |= (1<<DIR_Y);  // set dir to HIGH
+
+    initPos(0);
 
 }
 
 
 void loop(){
 
-    int errno;
-//    int dirX = DIRECTION_X;
-//    int dirY = DIRECTION_Y;
-            if( digitalRead(END_X) == HIGH )
-                Serial.println("EndOfLine");
-
     
-    if (a < 800){  //sweep 200 step in dir 1
-    
-        a++;
-        errno = step(1*DIRECTION_X, MOTX); // -1*-1 = 1 et -1*1 = -1
-        delay(1);              
-        readPoint();
-
-    }else{
-       a++;
-        errno = step(-1*DIRECTION_X, MOTX);
-        delay(1);
-        readPoint();
-    
-        if (a>1600){    //sweep 200 in dir 2
-
-            delay(1000);
-            a = 0;
-
-        }
-    }
+//    if (a < 120){  //sweep 200 step in dir 1
+//    
+//        a++;
+//        step(1*DIRECTION_X, MOTX); // -1*-1 = 1 et -1*1 = -1
+//        delay(3);              
+//        readPoint();
+//
+//    }else{
+//       a++;
+//        step(-1*DIRECTION_X, MOTX);
+//        delay(3);
+//        readPoint();
+//    
+//        if (a>240){    //sweep 200 in dir 2
+//
+//            delay(1000);
+//            a = 0;
+//
+//        }
+//    }
 }
 
 /*  move the motor 0 or 1 (X/Y)
@@ -107,35 +103,42 @@ void loop(){
  */
 int step( int nb, byte motor ){
 
-   if( motor == MOTX ){     
-
-       /* toggle direction */
-       if( nb > 0 )
-           PORTD |= (1<<DIR_X);    
-       else
-           PORTD &= ~(1<<DIR_X);    // toggle direction
-
-       PORTD |= (1<<STP_X);    // X step high
-       delay(1);               
-       PORTD &= ~(1<<STP_X);    // X step low
-
-   }else if( motor == MOTY){
-
-       /* toggle direction */
-       if( nb > 0 )
-           PORTD |= (1<<DIR_Y);    
-       else
-           PORTD &= ~(1<<DIR_Y);    // toggle direction
-
-       PORTD |= (1<<STP_Y);    // X step high
-       delay(1);               
-       PORTD &= ~(1<<STP_Y);    // X step low
-
-   }else{
-       return 1;
-   }
-
-   return 0;
+    int i = 0;
+    if( motor == MOTX ){     
+ 
+        /* toggle direction */
+        if( nb > 0 ){
+            PORTD |= (1<<DIR_X);    
+        }else{
+            PORTD &= ~(1<<DIR_X);    // toggle direction
+            nb *= -1;
+        }
+ 
+        for(i = 0; i <= nb; i++){
+            PORTD |= (1<<STP_X);    // X step high
+            delay(1);               
+            PORTD &= ~(1<<STP_X);    // X step low
+            delay(1);               
+        }
+ 
+    }else if( motor == MOTY){
+ 
+        /* toggle direction */
+        if( nb > 0 )
+            PORTD |= (1<<DIR_Y);    
+        else
+            PORTD &= ~(1<<DIR_Y);    // toggle direction
+ 
+        PORTD |= (1<<STP_Y);    // X step high
+        delay(1);               
+        PORTD &= ~(1<<STP_Y);    // X step low
+        delay(1);               
+ 
+    }else{
+        return 1;
+    }
+ 
+    return 0;
 }
 
 
@@ -177,16 +180,21 @@ long int readMLXtemperature(int TaTo) {
     return(lii*2-27315);            // return degre*100 
 }
 
-void initPos(){
+void initPos( byte motor ){
 
-    int eX, eY;
+    boolean end;
+ 
+    if( motor == MOTX ){
+        end = digitalRead(END_X);
 
-    eX = digitalRead(END_X);
-    eY = digitalRead(END_Y);
+        while( end != HIGH ){
+            step(-1, MOTX);
+            delay(3);
+            end = digitalRead(END_X);
+        }
 
-    while( digitalRead(END_X) != HIGH ){
-        step(1, MOTX);
-        delay(4);
+        step(160, MOTX);
+
     }
 
 
