@@ -106,11 +106,11 @@ void loop(){
                 step(-1, MOTX);
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
-                Serial.print(",");
+                //Serial.print(",");
             }
     
             tpl = readMLXtemperature(1);
-            //Serial.print(":");
+            Serial.print(":");
             Serial.println(tpl);
             //Serial.println(";");
     
@@ -148,9 +148,9 @@ int step( int nb, byte motor ){
  
         for(i = 0; i <= nb; i++){
             PORTD |= (1<<STP_X);    // X step high
-            delay(1);               
+            delay(3);               
             PORTD &= ~(1<<STP_X);    // X step low
-            delay(1);               
+            delay(3);               
         }
  
     }else if( motor == MOTY){
@@ -165,9 +165,9 @@ int step( int nb, byte motor ){
  
         for(i = 0; i <= nb; i++){
             PORTD |= (1<<STP_Y);    // X step high
-            delay(1);               
+            delay(3);               
             PORTD &= ~(1<<STP_Y);    // X step low
-            delay(1);               
+            delay(3);               
         }
         
  
