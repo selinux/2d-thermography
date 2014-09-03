@@ -55,8 +55,8 @@ void setup()
 
  /* Set micro stepping 
   * pins 4,5,8,9 HIGH (1/8 step) */
-  PORTD = B00110000;        // pins 4,5 HIGH (1/8 X step)
-  PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
+  //PORTD = B00110000;        // pins 4,5 HIGH (1/8 X step)
+  //PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
 
   if( DIRECTION_X )
       PORTD |= (1<<DIR_X);
@@ -67,27 +67,29 @@ void setup()
 
 
 void loop(){
-    if (a < 800){  //sweep 200 step in dir 1
+    if (a < 80){  //sweep 200 step in dir 1
     
         a++;
         PORTD |= (1<<STP_X);    // X step high
         PORTD |= (1<<STP_Y);
-        delay(1);               
+        delay(6);               
         PORTD &= ~(1<<STP_X);    // X step low
         PORTD &= ~(1<<STP_Y);
-        delay(6);              
+        delay(60);              
     }else{
-        PORTD &= ~(1<<DIR_X);    // toggle direction
-        PORTD &= ~(1<<DIR_Y);
+        //PORTD &= ~(1<<DIR_X);    // toggle direction
+        //PORTD &= ~(1<<DIR_Y);
+        PORTD &= ~(1<<DIR_X);
+        PORTD &= ~(1<<DIR_X);
         a++;
         PORTD |= (1<<STP_X);    // X step high
         PORTD |= (1<<STP_Y);
-        delay(1);
+        delay(6);
         PORTD &= ~(1<<STP_X);    // X step low
         PORTD &= ~(1<<STP_Y);
-        delay(6);
+        delay(60);
     
-        if (a > 1600){    //sweep 200 in dir 2
+        if (a > 160){    //sweep 200 in dir 2
             delay(1000);
             a = 0;
             PORTD ^= (1<<DIR_X);    // toggle direction
