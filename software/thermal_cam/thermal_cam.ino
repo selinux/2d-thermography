@@ -87,10 +87,11 @@ void loop(){
     long int tpl;
 
     int start_read = 0;
-
-    start_read = Serial.read();
-    if(start_read != 0)
-        start_scan = true;
+    if (Serial.available() > 0) {
+        start_read = Serial.read();
+        if(start_read != 0)
+            start_scan = true;
+    }
 
 
     if(start_scan == true){
@@ -110,7 +111,7 @@ void loop(){
             }
     
             tpl = readMLXtemperature(1);
-            Serial.print(":");
+            //Serial.print(":");
             Serial.println(tpl);
             //Serial.println(";");
     
