@@ -19,10 +19,10 @@
 
 #include <i2cmaster.h>
 #include <stdlib.h>
-//#define DIRECTION_X     1       // 1 or -1
-//#define DIRECTION_Y     1       // 1 or -1
-#define INVERT_X
-#define INVERT_Y
+
+
+//#define INVERT_X
+//#define INVERT_Y
 
 #ifdef INVERT_X
 #define FW_X    1
@@ -49,8 +49,6 @@
 #define PIN_DIRY        7
 #define MS1_Y           8
 #define MS2_Y           9
-#define MICRO_STEP_X    1   // possible values are = 1,2,4,8
-#define MICRO_STEP_Y    1   // possible values are = 1,2,4,8
 
 #define PIN_ENDX        10
 #define PIN_ENDY        11
@@ -98,14 +96,18 @@ void setup()
 
     switch( ms_x ){
         case HALF:
-            PORTD |= (1<<MS1_X);
+            digitalWrite(MS1_X, HIGH);
+//            PORTD |= (1<<MS1_X);
             break;
         case QUART:
-            PORTD |= (1<<MS2_X);
+            digitalWrite(MS2_X, HIGH);
+//            PORTD |= (1<<MS2_X);
             break;
         case EIGHTH:
-            PORTD |= (1<<MS1_X);
-            PORTD |= (1<<MS2_X);
+            digitalWrite(MS1_X, HIGH);
+            digitalWrite(MS2_X, HIGH);
+//            PORTD |= (1<<MS1_X);
+//            PORTD |= (1<<MS2_X);
             break;
         case FULL:
             break;
@@ -113,31 +115,25 @@ void setup()
 
     switch( ms_y ){
         case HALF:
-            PORTD |= (1<<MS1_Y);
+            digitalWrite(MS1_Y, HIGH);
+//            PORTD |= (1<<MS1_Y);
             break;
         case QUART:
-            PORTD |= (1<<MS2_Y);
+            digitalWrite(MS2_Y, HIGH);
+//            PORTD |= (1<<MS2_Y);
             break;
         case EIGHTH:
-            PORTD |= (1<<MS1_Y);
-            PORTD |= (1<<MS2_Y);
+            digitalWrite(MS1_Y, HIGH);
+            digitalWrite(MS2_Y, HIGH);
+//            PORTD |= (1<<MS1_Y);
+//            PORTD |= (1<<MS2_Y);
             break;
         case FULL:
             break;
     }
 
-    //PORTD = B00110000;        // pins 4,5 HIGH (1/8 X step)
-    //PORTB = B00000011;        // pins 8,9 HIGH (1/8 Y step)
-
     digitalWrite(PIN_DIRX, FW_X);
     digitalWrite(PIN_DIRY, FW_Y);
-
-//    if( DIRECTION_X > 0 )
-//        PORTD |= (1<<DIR_X);  // set dir to HIGH
-//    if( DIRECTION_Y > 0 )
-//        PORTD |= (1<<DIR_Y);  // set dir to HIGH
-
-   // initPos(0);
 
 }
 
@@ -148,7 +144,7 @@ void loop(){
     int j = 0;
     long int tpl;
 
-    int start_read = 0;
+    //int start_read = 0;
  //   if (Serial.available() > 0) {
 //        start_read = Serial.read();
 //    if(start_read != 0)
@@ -166,7 +162,7 @@ void loop(){
         for ( j=0; j < size_y; j++ ){
     
             for ( i=0; i < size_x; i++ ){
-                if( i%2 == 0 )
+                if( j%2 == 0 )
                     step(1, FW_X, MOTX);
                 else
                     step(1, BW_X, MOTX);
@@ -202,11 +198,7 @@ int step( int nb, int dir, byte motor ){
  
         /* select direction */
         digitalWrite(PIN_DIRX, dir);
-//        if( dir ){
-//            PORTD |= (1<<PIN_DIRX);    
-//        }else{
-//            PORTD &= ~(1<<PIN_DIRX);    // toggle direction
-//        }
+        delay(1);               
  
         for(i = 0; i <= nb; i++){
             PORTD |= (1<<PIN_STPX);    // X step high
@@ -219,11 +211,7 @@ int step( int nb, int dir, byte motor ){
  
         /* select direction */
         digitalWrite(PIN_DIRY, dir);
-//        if( dir ){
-//            PORTD |= (1<<DIR_Y);    
-//        }else{
-//            PORTD &= ~(1<<DIR_Y);    // toggle direction
-//        }
+        delay(1);               
  
         for(i = 0; i <= nb; i++){
             PORTD |= (1<<PIN_STPY);    // X step high
@@ -234,27 +222,13 @@ int step( int nb, int dir, byte motor ){
         
  
     }else{
+
         return 1;
     }
  
     return 0;
 }
 
-
-void readPoint(){
-
-    long int tpl;
-
-    tpl = readMLXtemperature(0);
-//    Serial.print("#");
-    Serial.print(tpl);
-//    tpl = readMLXtemperature(1);
-//    Serial.print(",");
-//    Serial.println(tpl);
-//    Serial.println("Fin du cycle");
-
-
-}
 
 //****************************************************************
 // read MLX90614 i2c ambient or object temperature

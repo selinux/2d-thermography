@@ -26,8 +26,8 @@ close all
 
 
 %s0 = serial();
-x = 40;
-y = 20;
+x = 41;
+y = 21;
 min = 1000;
 max = 0;
 s0 = serial("/dev/ttyACM0", 115200)
@@ -41,20 +41,20 @@ endwhile
 
 srl_read(s0,1); % skip one more
 
-j = 1;
-while( j <= y )
-  i = 1;
+l = 1;
+while( l <= y+1 )
+  k = 1;
   
-  while( i <= x)
+  while( k <= x)
   
     data = srl_read(s0, 4);
     mesure = str2num(char(data)); % Convert uint8 array to string, 
     mesure = mesure/100;
     % values are read in both direction
-    if(mod(j,2) == 0 )     
-      img(j,i) = mesure;
+    if(mod(l,2) == 0 )     
+      img(l,k) = mesure;
     else
-      img(j,x-i+1) = mesure; % enter value backward
+      img(l,x-k+2) = mesure; % enter value backward
     endif
     
     % hold min ans max mesure
@@ -64,12 +64,12 @@ while( j <= y )
       max = mesure;
     endif
     
-    i++;
+    k++;
     
   endwhile
   data = srl_read(s0,4);
   %img(j,x+1) = str2num(char(data));
-  j++;
+  l++;
   %srl_flush(s0);
 endwhile
 
