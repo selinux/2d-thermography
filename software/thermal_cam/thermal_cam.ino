@@ -60,8 +60,8 @@
 
 enum MS { FULL, HALF, QUART, EIGHTH };
 
-enum MS ms_x = QUART;
-enum MS ms_y = FULL;
+enum MS ms_x = EIGHTH;
+enum MS ms_y = QUART;
 
 
 int a = 0;     //  gen counter
@@ -136,51 +136,54 @@ void loop(){
     int j = 0;
     long int tpl;
 
-    while (Serial.available() > 0) {
 
-        // look for the next valid integer in the incoming serial stream:
-        int size_x = Serial.parseInt();
-        step(size_x, FW_X, MOTX);
-        // do it again:
-        int size_y = Serial.parseInt();
-        Serial.println(size_y);
+    // look for the next valid integer in the incoming serial stream:
+    int size_x = Serial.parseInt();
+    // do it again:
+    int size_y = Serial.parseInt();
+
+    if ( size_x != 0 && size_y != 0 ){
+        Serial.print(size_x);
+        Serial.print(" ");
+        Serial.print(size_x);
+        Serial.println(" Ok pour commencer");
+        start_scan = true;
+    }
+
+
+    if(start_scan == true){
+        Serial.println("start scan #");
+        // Go to upper line (to do so motor goes down)
+        step( (size_y/2), BW_Y, MOTY);
+        // Go to the beging of line 
+        step( (size_x/2), BW_X, MOTX);
     
-        if (Serial.read() == '\n' && size_x != 0 && size_y != 0 )
-            start_scan == true;
+        for ( j=0; j < size_y; j++ ){
     
-    
-        if(start_scan == true){
-            Serial.println("start scan #");
-            // Go to upper line (to do so motor goes down)
-            step( (size_y/2), BW_Y, MOTY);
-            // Go to the beging of line 
-            step( (size_x/2), BW_X, MOTX);
-        
-            for ( j=0; j < size_y; j++ ){
-        
-                for ( i=0; i < size_x; i++ ){
-                    if( j%2 == 0 )
-                        step(1, FW_X, MOTX);
-                    else
-                        step(1, BW_X, MOTX);
-    
-                    tpl = readMLXtemperature(0);
-                    Serial.print(tpl);
-                }
-        
-                tpl = readMLXtemperature(1);
+            for ( i=0; i < size_x; i++ ){
+                if( j%2 == 0 )
+                    step(1, FW_X, MOTX);
+                else
+                    step(1, BW_X, MOTX);
+
+                tpl = readMLXtemperature(0);
                 Serial.print(tpl);
-        
-                // Go one line down (motor up)
-                step(1, FW_Y, MOTY);
+                Serial.print(",");
             }
-        
-            start_scan = false;
     
-        }else{
-            Serial.println("Scan termineted...");
-            start_scan = false;
+            /* at the EOL, ambient temperature is sent */
+            tpl = readMLXtemperature(1);
+            //Serial.print(tpl);
+    
+            /* Go one line down (motor up) */
+            step(1, FW_Y, MOTY);
         }
+    
+        start_scan = false;
+
+    }else{
+        Serial.println("Scan termineted...");
+        start_scan = false;
     }
 }
 

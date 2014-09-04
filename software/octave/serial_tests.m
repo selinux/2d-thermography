@@ -30,12 +30,18 @@ close all
 %s0 = serial();
 x = 40;
 y = 20;
+
+DATA = strcat(num2str(x),",",num2str(y))
+
 min = 1000;
 max = 0;
 
-s0 = serial("/dev/ttyACM2", 115200);
+s0 = serial("/dev/ttyACM1", 115200);
 srl_flush(s0);
-srl_write(s0, "40,20,34");
+pause(1);
+srl_write(s0, DATA)
+srl_flush(s0)
+%srl_close(s0);
 
 %while(1)
 %  data = srl_read(s0,4);

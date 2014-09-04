@@ -30,11 +30,16 @@ colormap(hsv (128));
 %s0 = serial();
 x = 40;
 y = 20;
+
+DATA = strcat(num2str(x),",",num2str(y))
+
+
 min = 1000;
 max = 0;
-s0 = serial("/dev/ttyACM0", 115200)
+s0 = serial("/dev/ttyACM1", 115200)
 srl_flush(s0);
-srl_write(s0, "40,20\n");
+srl_write(s0, DATA);
+srl_flush(s0);
 %srl_write(s0, "20");
 %srl_write(s0, '\n');
 
@@ -75,6 +80,8 @@ while( l <= y+1 )
   l++;
   %srl_flush(s0);
 endwhile
+
+srl_close(s0);
 
 %img = img;
 
