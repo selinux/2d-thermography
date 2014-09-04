@@ -19,6 +19,8 @@
 clear all
 close all
 
+colormap(hsv (128));
+
 % load pakage for serial communication
 % http://wiki.octave.org/Instrument_control_package
 % pkg load instrument_control
@@ -26,20 +28,21 @@ close all
 
 
 %s0 = serial();
-x = 41;
-y = 21;
+x = 40;
+y = 20;
 min = 1000;
 max = 0;
 s0 = serial("/dev/ttyACM0", 115200)
 srl_flush(s0);
-srl_write(s0, "40");
-srl_write(s0, "20");
+srl_write(s0, "40,20\n");
+%srl_write(s0, "20");
+%srl_write(s0, '\n');
 
 while(char(srl_read(s0,1)) != "#" )
   %fprintf("not started yet\n");
 endwhile
 
-srl_read(s0,1); % skip one more
+%srl_read(s0,1); % skip one more
 
 l = 1;
 while( l <= y+1 )
@@ -54,7 +57,7 @@ while( l <= y+1 )
     if(mod(l,2) == 0 )     
       img(l,k) = mesure;
     else
-      img(l,x-k+2) = mesure; % enter value backward
+      img(l,x-k+1) = mesure; % enter value backward
     endif
     
     % hold min ans max mesure
@@ -73,7 +76,7 @@ while( l <= y+1 )
   %srl_flush(s0);
 endwhile
 
-img = img;
+%img = img;
 
 % normalize image values from 0 to 255
 %img1 = img .- min;

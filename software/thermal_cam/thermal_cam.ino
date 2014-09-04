@@ -60,17 +60,17 @@
 
 enum MS { FULL, HALF, QUART, EIGHTH };
 
-enum MS ms_x = FULL;
+enum MS ms_x = QUART;
 enum MS ms_y = FULL;
 
 
 int a = 0;     //  gen counter
 
 /* size to scan */
-int size_x = 40;
-int size_y = 20;
+//int size_x = 0;
+//int size_y = 0;
 
-boolean start_scan = true;
+boolean start_scan = false;
 
 
 void setup() 
@@ -97,17 +97,13 @@ void setup()
     switch( ms_x ){
         case HALF:
             digitalWrite(MS1_X, HIGH);
-//            PORTD |= (1<<MS1_X);
             break;
         case QUART:
             digitalWrite(MS2_X, HIGH);
-//            PORTD |= (1<<MS2_X);
             break;
         case EIGHTH:
             digitalWrite(MS1_X, HIGH);
             digitalWrite(MS2_X, HIGH);
-//            PORTD |= (1<<MS1_X);
-//            PORTD |= (1<<MS2_X);
             break;
         case FULL:
             break;
@@ -116,17 +112,13 @@ void setup()
     switch( ms_y ){
         case HALF:
             digitalWrite(MS1_Y, HIGH);
-//            PORTD |= (1<<MS1_Y);
             break;
         case QUART:
             digitalWrite(MS2_Y, HIGH);
-//            PORTD |= (1<<MS2_Y);
             break;
         case EIGHTH:
             digitalWrite(MS1_Y, HIGH);
             digitalWrite(MS2_Y, HIGH);
-//            PORTD |= (1<<MS1_Y);
-//            PORTD |= (1<<MS2_Y);
             break;
         case FULL:
             break;
@@ -144,47 +136,52 @@ void loop(){
     int j = 0;
     long int tpl;
 
-    //int start_read = 0;
- //   if (Serial.available() > 0) {
-//        start_read = Serial.read();
-//    if(start_read != 0)
-//        start_scan = true;
-//    }
+    while (Serial.available() > 0) {
 
-
-    if(start_scan == true){
-        Serial.println("start scan #");
-        // Go to upper line (to do so motor goes down)
-        step( (size_y/2), BW_Y, MOTY);
-        // Go to the beging of line 
-        step( (size_x/2), BW_X, MOTX);
+        // look for the next valid integer in the incoming serial stream:
+        int size_x = Serial.parseInt();
+        step(size_x, FW_X, MOTX);
+        // do it again:
+        int size_y = Serial.parseInt();
+        Serial.println(size_y);
     
-        for ( j=0; j < size_y; j++ ){
+        if (Serial.read() == '\n' && size_x != 0 && size_y != 0 )
+            start_scan == true;
     
-            for ( i=0; i < size_x; i++ ){
-                if( j%2 == 0 )
-                    step(1, FW_X, MOTX);
-                else
-                    step(1, BW_X, MOTX);
-
-                tpl = readMLXtemperature(0);
+    
+        if(start_scan == true){
+            Serial.println("start scan #");
+            // Go to upper line (to do so motor goes down)
+            step( (size_y/2), BW_Y, MOTY);
+            // Go to the beging of line 
+            step( (size_x/2), BW_X, MOTX);
+        
+            for ( j=0; j < size_y; j++ ){
+        
+                for ( i=0; i < size_x; i++ ){
+                    if( j%2 == 0 )
+                        step(1, FW_X, MOTX);
+                    else
+                        step(1, BW_X, MOTX);
+    
+                    tpl = readMLXtemperature(0);
+                    Serial.print(tpl);
+                }
+        
+                tpl = readMLXtemperature(1);
                 Serial.print(tpl);
+        
+                // Go one line down (motor up)
+                step(1, FW_Y, MOTY);
             }
+        
+            start_scan = false;
     
-            tpl = readMLXtemperature(1);
-            Serial.print(tpl);
-    
-            // Go one line down (motor up)
-            step(1, FW_Y, MOTY);
+        }else{
+            Serial.println("Scan termineted...");
+            start_scan = false;
         }
-    
-        //start_scan = false;
-
-    }else{
-        Serial.println("Scan termineted...");
-        //start_scan = false;
     }
-    
 }
 
 
@@ -230,8 +227,12 @@ int step( int nb, int dir, byte motor ){
 }
 
 
-//****************************************************************
-// read MLX90614 i2c ambient or object temperature
+/****************************************************************
+ *
+ * read MLX90614 i2c ambient or object temperaturei
+ *
+ ****************************************************************/
+
 long int readMLXtemperature(int TaTo) {
     long int lii = 0;
     int dlsb,dmsb,pec;
@@ -269,8 +270,6 @@ void initPos( byte motor ){
         step(160, BW_X, MOTX);
 
     }
-
-
 
 }
 
