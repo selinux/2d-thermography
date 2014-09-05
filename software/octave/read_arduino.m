@@ -19,58 +19,53 @@
 clear all
 close all
 
-colormap(hsv (128));
 
 % load pakage for serial communication
 % http://wiki.octave.org/Instrument_control_package
 % pkg load instrument_control
 
 
+x = 200;
+y = 60;
 
-%s0 = serial();
-x = 40;
-y = 20;
+DATA = strcat(num2str(x),",",num2str(y),"\n")
 
-DATA = strcat(num2str(x),",",num2str(y))
-
-
-min = 1000;
-max = 0;
-s0 = serial("/dev/ttyACM1", 115200)
-srl_flush(s0);
+img = zeros(y,x);
+s0 = serial("/dev/ttyACM0", 115200)
+pause(5);
+%srl_flush(s0);
 srl_write(s0, DATA);
 srl_flush(s0);
-%srl_write(s0, "20");
+%srl_write(s0, "20,10\n")
 %srl_write(s0, '\n');
 
 while(char(srl_read(s0,1)) != "#" )
   %fprintf("not started yet\n");
 endwhile
 
-%srl_read(s0,1); % skip one more
+srl_read(s0,2); % skip one more
 
 l = 1;
-while( l <= y+1 )
+while( l <= y )
   k = 1;
   
   while( k <= x)
-  
+
+    %srl_flush(s0);  
     data = srl_read(s0, 4);
+
+    %char(data)
     mesure = str2num(char(data)); % Convert uint8 array to string, 
     mesure = mesure/100;
+    %dump = srl_read(s0,1);
     % values are read in both direction
-    if(mod(l,2) == 0 )     
+    if(mod(l,2) == 1 )     
       img(l,k) = mesure;
     else
+      %img(l,k) = mesure;
       img(l,x-k+1) = mesure; % enter value backward
     endif
     
-    % hold min ans max mesure
-    if( min > mesure )
-      min = mesure;
-    elseif ( max < mesure )
-      max = mesure;
-    endif
     
     k++;
     
@@ -84,15 +79,22 @@ endwhile
 srl_close(s0);
 
 %img = img;
+minimum = min(min(img));
+maximum = max(max(img));
 
 % normalize image values from 0 to 255
 %img1 = img .- min;
-%img1 = img1./(max-min);
-img1 = img;
-img1 = img1./(50);
+colormap(jet (128));
+img1 = img./maximum.*128;
 
-img1 = img1.*255;
+img2 = img .- minimum;
+img2 = img2./(maximum-minimum).*128;
+
+%img1 = img;
+%img1 = img1./(50);
+
+%img1 = img1.*128;
 
 % print result
-image(img1)
-
+%image(img1)
+image(img2)
