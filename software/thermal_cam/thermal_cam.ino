@@ -86,9 +86,11 @@ void setup()
     Serial.println("Init motors");
     /* init motors 
      * *****************/
-    DDRD = B11001100;         // set pins 2-7 as OUTPUT
-    DDRB = B00010000;         // set pins 8-11 as OUTPUT
+    DDRD = B11001100;         // set pins 2,3,6,7 as OUTPUT
+    DDRB = B00010000;         // set pins 12 as OUTPUT
   
+    /* force laser LOW just in case !!!! */
+    digitalWrite(PIN_LASER, LOW);
     /* Set micro stepping 
     * sample : pins 4,5,8,9 HIGH (1/8 step) 
     * MS1 = L, MS2 = L   >  Full step 
@@ -167,6 +169,8 @@ void loop(){
 
     if(start_scan == true){
         Serial.println("start scan #");
+        digitalWrite(PIN_LASER, HIGH);
+
         // Go to upper line (to do so motor goes down)
         step( (size_y/2), BW_Y, MOTY);
         // Go to the beging of line 
@@ -193,6 +197,11 @@ void loop(){
             step(1, FW_Y, MOTY);
         }
     
+        /* move back to origin and turn the laser off */
+        step( (size_y/2), FW_Y, MOTY);
+        step( (size_x/2), FW_X, MOTX);
+        digitalWrite(PIN_LASER, LOW);
+
         start_scan = false;
 
     }else{
