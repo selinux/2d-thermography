@@ -56,19 +56,21 @@
 
 #define MOTX            0
 #define MOTY            1
-
+#define INIT_STEPX      120
+#define INIT_STEPY      110
 
 enum MS { FULL, HALF, QUART, EIGHTH };
 
-enum MS ms_x = EIGHTH;
+enum MS ms_x = QUART;
 enum MS ms_y = QUART;
 
 
 int a = 0;     //  gen counter
 
 /* size to scan */
-//int size_x = 0;
-//int size_y = 0;
+int size_x = 0;
+int size_y = 0;
+int stepx, stepy;
 
 boolean start_scan = false;
 
@@ -97,13 +99,16 @@ void setup()
     switch( ms_x ){
         case HALF:
             digitalWrite(MS1_X, HIGH);
+            stepx = 2;
             break;
         case QUART:
             digitalWrite(MS2_X, HIGH);
+            stepx = 4;
             break;
         case EIGHTH:
             digitalWrite(MS1_X, HIGH);
             digitalWrite(MS2_X, HIGH);
+            stepx = 8;
             break;
         case FULL:
             break;
@@ -112,13 +117,16 @@ void setup()
     switch( ms_y ){
         case HALF:
             digitalWrite(MS1_Y, HIGH);
+            stepy = 2;
             break;
         case QUART:
             digitalWrite(MS2_Y, HIGH);
+            stepy = 4;
             break;
         case EIGHTH:
             digitalWrite(MS1_Y, HIGH);
             digitalWrite(MS2_Y, HIGH);
+            stepy = 8;
             break;
         case FULL:
             break;
@@ -127,6 +135,8 @@ void setup()
     digitalWrite(PIN_DIRX, FW_X);
     digitalWrite(PIN_DIRY, FW_Y);
 
+    initPos(MOTX);
+    initPos(MOTY);
 }
 
 
@@ -142,10 +152,14 @@ void loop(){
     // do it again:
     int size_y = Serial.parseInt();
 
+    // debug
+    //size_x = 400;
+    //size_y = 20;
+
     if ( size_x != 0 && size_y != 0 ){
         Serial.print(size_x);
         Serial.print(" ");
-        Serial.print(size_x);
+        Serial.print(size_y);
         Serial.println(" Ok pour commencer");
         start_scan = true;
     }
@@ -168,7 +182,7 @@ void loop(){
 
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
-                Serial.print(",");
+                //Serial.print(",");
             }
     
             /* at the EOL, ambient temperature is sent */
@@ -265,13 +279,36 @@ void initPos( byte motor ){
         end = digitalRead(PIN_ENDX);
 
         while( end != HIGH ){
-            step(1, BW_X, MOTX);
-            delay(3);
+            step(1, FW_X, MOTX);
+            delay(1);
             end = digitalRead(PIN_ENDX);
         }
 
-        step(160, BW_X, MOTX);
+        while( end == HIGH ){
+            step(1, BW_X, MOTX);
+            delay(1);
+            end = digitalRead(PIN_ENDX);
+        }
 
+        step(INIT_STEPX*stepx, BW_X, MOTX);
+
+    }else{
+
+        end = digitalRead(PIN_ENDY);
+
+        while( end != HIGH ){
+            step(1, FW_Y, MOTY);
+            delay(1);
+            end = digitalRead(PIN_ENDY);
+        }
+
+        while( end == HIGH ){
+            step(1, BW_Y, MOTY);
+            delay(1);
+            end = digitalRead(PIN_ENDY);
+        }
+
+        step(INIT_STEPY*stepy, BW_Y, MOTY);
     }
 
 }
