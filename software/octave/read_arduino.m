@@ -25,8 +25,8 @@ close all
 % pkg load instrument_control
 
 
-x = 200;
-y = 60;
+x = 150;
+y = 30;
 
 DATA = strcat(num2str(x),",",num2str(y),"\n")
 

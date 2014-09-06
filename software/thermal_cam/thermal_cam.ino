@@ -56,12 +56,13 @@
 
 #define MOTX            0
 #define MOTY            1
-#define INIT_STEPX      120
+#define INIT_STEPX      110
 #define INIT_STEPY      110
+#define SPEED           2
 
 enum MS { FULL=1, HALF=2, QUART=4, EIGHTH=8 };
 
-enum MS ms_x = HALF;
+enum MS ms_x = QUART;
 enum MS ms_y = HALF;
 
 
@@ -184,6 +185,12 @@ void loop(){
                 //Serial.print(",");
             }
     
+//  test correction de dephasage
+//            if( j%2 == 0 )
+//                step(14, FW_X, MOTX);
+//            else
+//                step(14, BW_X, MOTX);
+
             /* at the EOL, ambient temperature is sent */
             tpl = readMLXtemperature(1);
             Serial.print(tpl);
@@ -222,9 +229,9 @@ int step( int nb, int dir, byte motor ){
  
         for(i = 0; i <= nb; i++){
             PORTD |= (1<<PIN_STPX);    // X step high
-            delay(2);               
+            delay(SPEED);               
             PORTD &= ~(1<<PIN_STPX);    // X step low
-            delay(2);               
+            delay(SPEED);               
         }
  
     }else if( motor == MOTY){
@@ -235,9 +242,9 @@ int step( int nb, int dir, byte motor ){
  
         for(i = 0; i <= nb; i++){
             PORTD |= (1<<PIN_STPY);    // X step high
-            delay(2);               
+            delay(SPEED);
             PORTD &= ~(1<<PIN_STPY);    // X step low
-            delay(2);               
+            delay(SPEED);             
         }
         
  
