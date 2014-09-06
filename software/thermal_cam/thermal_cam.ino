@@ -189,6 +189,10 @@ void loop(){
             /* move backward */
             step( size_x*2, BW_X, MOTX);
 
+            /* lost step correction */
+            if( j%2 == 0 )
+                step( 1, FW_X, MOTX);
+
             /* at the EOL, ambient temperature is sent */
             tpl = readMLXtemperature(1);
             Serial.print(tpl);

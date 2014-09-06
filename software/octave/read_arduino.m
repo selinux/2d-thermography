@@ -25,25 +25,25 @@ close all
 % pkg load instrument_control
 
 
-x = 150;
-y = 60;
+x = 300;
+y = 100;
 
-DATA = strcat(num2str(x),",",num2str(y),"\n")
+surface = strcat(num2str(x),",",num2str(y),"\n")
 
 img = zeros(y,x);
 s0 = serial("/dev/ttyACM0", 115200)
-pause(5);
-%srl_flush(s0);
-srl_write(s0, DATA);
+pause(5); % arduino reset after serial connexion...wait end of homing
+
+srl_write(s0, surface);
 srl_flush(s0);
-%srl_write(s0, "20,10\n")
-%srl_write(s0, '\n');
+
 
 while(char(srl_read(s0,1)) != "#" )
-  %fprintf("not started yet\n");
+  % do nothing
 endwhile
+start_time = time;
 
-srl_read(s0,2); % skip one more
+srl_read(s0,2); % skip \n
 
 l = 1;
 while( l <= y )
@@ -51,10 +51,8 @@ while( l <= y )
   
   while( k <= x)
 
-    %srl_flush(s0);  
     data = srl_read(s0, 4);
 
-    %char(data)
     mesure = str2num(char(data)); % Convert uint8 array to string, 
     mesure = mesure/100;
     %dump = srl_read(s0,1);
@@ -98,3 +96,4 @@ img2 = img2./(maximum-minimum).*128;
 % print result
 %image(img1)
 image(img2)
+enlapsed_time = time - start_time
