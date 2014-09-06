@@ -9,8 +9,9 @@ The main purpose is to control smoothly the hardware and aquire
 points as fast as possible throw a serial line. Image rendering
 will be done by octave.
 
+![ScreenShot](media/source_mesure.png)
 
-![ScreenShot](media/2d-thermography-harware_0.jpg )
+![ScreenShot](media/2d-thermography-harware_4.jpg )
 
 
 hardware :
