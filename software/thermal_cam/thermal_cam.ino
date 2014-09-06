@@ -58,7 +58,7 @@
 #define MOTY            1
 #define INIT_STEPX      110
 #define INIT_STEPY      110
-#define SPEED           3
+#define SPEED           2
 
 enum MS { FULL=1, HALF=2, QUART=4, EIGHTH=8 };
 

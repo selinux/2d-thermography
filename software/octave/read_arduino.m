@@ -25,8 +25,8 @@ close all
 % pkg load instrument_control
 
 
-x = 300;
-y = 100;
+x = 250;
+y = 200;
 
 surface = strcat(num2str(x),",",num2str(y),"\n")
 
@@ -95,5 +95,16 @@ img2 = img2./(maximum-minimum).*128;
 
 % print result
 %image(img1)
-image(img2)
-enlapsed_time = time - start_time
+image(img2);
+
+enlapsed_time = time - start_time;
+%minimum
+%maximum
+delta = maximum - minimum;
+
+title ("Thermogram");
+xlabel ("largeur");
+ylabel ("longueur");
+
+colorbar
+s
