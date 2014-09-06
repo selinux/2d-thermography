@@ -58,20 +58,17 @@
 #define MOTY            1
 #define INIT_STEPX      110
 #define INIT_STEPY      110
-#define SPEED           2
+#define SPEED           3
 
 enum MS { FULL=1, HALF=2, QUART=4, EIGHTH=8 };
 
 enum MS ms_x = QUART;
-enum MS ms_y = HALF;
+enum MS ms_y = QUART;
 
-
-int a = 0;     //  gen counter
 
 /* size to scan */
 int size_x = 0;
 int size_y = 0;
-int stepx, stepy;
 
 boolean start_scan = false;
 
@@ -98,8 +95,6 @@ void setup()
     * MS1 = H, MS2 = L   >  Half step 
     * MS1 = L, MS2 = H   >  Quarter step 
     * MS1 = H, MS2 = H   >  Eighth step */
-    stepx = ms_x;
-    stepy = ms_y;
     switch( ms_x ){
         case HALF:
             digitalWrite(MS1_X, HIGH);
@@ -175,10 +170,10 @@ void loop(){
         for ( j=0; j < size_y; j++ ){
     
             for ( i=0; i < size_x; i++ ){
-                if( j%2 == 0 )
+                //if( j%2 == 0 )
                     step(1, FW_X, MOTX);
-                else
-                    step(1, BW_X, MOTX);
+                //else
+                //    step(1, BW_X, MOTX);
 
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
@@ -191,6 +186,9 @@ void loop(){
 //            else
 //                step(14, BW_X, MOTX);
 
+            /* move backward */
+            step( size_x*2, BW_X, MOTX);
+
             /* at the EOL, ambient temperature is sent */
             tpl = readMLXtemperature(1);
             Serial.print(tpl);
@@ -199,7 +197,7 @@ void loop(){
             step(1, FW_Y, MOTY);
         }
 
-        delay(500);
+        delay(1000);
         /* move back to origin and turn the laser off */
         step( (size_y/2), BW_Y, MOTY);
         step( (size_x/2), FW_X, MOTX);
@@ -209,7 +207,7 @@ void loop(){
 
 
     }else{
-        Serial.println("Scan termineted...");
+        Serial.println("Waiting...");
         start_scan = false;
     }
 }
@@ -225,7 +223,7 @@ int step( int nb, int dir, byte motor ){
  
         /* select direction */
         digitalWrite(PIN_DIRX, dir);
-        delay(1);               
+        delay(1);
  
         for(i = 0; i <= nb; i++){
             PORTD |= (1<<PIN_STPX);    // X step high
@@ -303,7 +301,7 @@ void initPos( byte motor ){
             end = digitalRead(PIN_ENDX);
         }
 
-        step(INIT_STEPX*stepx, BW_X, MOTX);
+        step(INIT_STEPX*ms_x, BW_X, MOTX);
 
     }else{
 
@@ -321,7 +319,7 @@ void initPos( byte motor ){
             end = digitalRead(PIN_ENDY);
         }
 
-        step(INIT_STEPY*stepy, BW_Y, MOTY);
+        step(INIT_STEPY*ms_y, BW_Y, MOTY);
     }
 
 }

@@ -26,7 +26,7 @@ close all
 
 
 x = 150;
-y = 30;
+y = 60;
 
 DATA = strcat(num2str(x),",",num2str(y),"\n")
 
@@ -59,12 +59,12 @@ while( l <= y )
     mesure = mesure/100;
     %dump = srl_read(s0,1);
     % values are read in both direction
-    if(mod(l,2) == 1 )     
+    %if(mod(l,2) == 1 )     
       img(l,k) = mesure;
-    else
+    %else
       %img(l,k) = mesure;
-      img(l,x-k+1) = mesure; % enter value backward
-    endif
+    %  img(l,x-k+1) = mesure; % enter value backward
+    %endif
     
     
     k++;
