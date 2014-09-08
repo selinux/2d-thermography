@@ -24,9 +24,10 @@ close all
 % http://wiki.octave.org/Instrument_control_package
 % pkg load instrument_control
 
+COLORS = 1024;
 
-x = 250;
-y = 200;
+x = 80;
+y = 20;
 
 surface = strcat(num2str(x),",",num2str(y),"\n")
 
@@ -57,12 +58,11 @@ while( l <= y )
     mesure = mesure/100;
     %dump = srl_read(s0,1);
     % values are read in both direction
-    %if(mod(l,2) == 1 )     
+    if(mod(l,2) == 1 )     
       img(l,k) = mesure;
-    %else
-      %img(l,k) = mesure;
-    %  img(l,x-k+1) = mesure; % enter value backward
-    %endif
+    else
+      img(l,x-k+1) = mesure; % enter value backward
+    endif
     
     
     k++;
@@ -82,11 +82,11 @@ maximum = max(max(img));
 
 % normalize image values from 0 to 255
 %img1 = img .- min;
-colormap(jet (128));
-img1 = img./maximum.*128;
+colormap(jet (COLORS));
+img1 = img./maximum.*COLORS;
 
 img2 = img .- minimum;
-img2 = img2./(maximum-minimum).*128;
+img2 = img2./(maximum-minimum).*COLORS;
 
 %img1 = img;
 %img1 = img1./(50);
@@ -98,13 +98,13 @@ img2 = img2./(maximum-minimum).*128;
 image(img2);
 
 enlapsed_time = time - start_time;
-%minimum
-%maximum
-delta = maximum - minimum;
+minimum
+maximum
+delta = maximum - minimum
 
 title ("Thermogram");
 xlabel ("largeur");
 ylabel ("longueur");
 
-colorbar
-s
+output = colorbar
+saveas(output, "image")

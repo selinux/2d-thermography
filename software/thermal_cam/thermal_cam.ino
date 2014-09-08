@@ -170,13 +170,14 @@ void loop(){
         for ( j=0; j < size_y; j++ ){
     
             for ( i=0; i < size_x; i++ ){
-                //if( j%2 == 0 )
+                if( j%2 == 0 )
                     step(1, FW_X, MOTX);
-                //else
-                //    step(1, BW_X, MOTX);
+                else
+                    step(1, BW_X, MOTX);
 
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
+                delay(100);
                 //Serial.print(",");
             }
     
@@ -187,11 +188,13 @@ void loop(){
 //                step(14, BW_X, MOTX);
 
             /* move backward */
-            step( size_x*2, BW_X, MOTX);
+            //step( size_x*2, BW_X, MOTX);
 
             /* lost step correction */
             if( j%2 == 0 )
-                step( 1, FW_X, MOTX);
+                step(3, BW_X, MOTX);
+            else
+                step(3, FW_X, MOTX);
 
             /* at the EOL, ambient temperature is sent */
             tpl = readMLXtemperature(1);
