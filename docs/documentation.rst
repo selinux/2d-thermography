@@ -33,8 +33,18 @@ Matériel
 Montage
 ---------
 
-Le montage a été relativement facile. J'ai perdu du temps avec le câblage du capteur MLX90614 en interpretant mal la datasheet (vue de dessus, vue de dessous).
+Le montage a été relativement facile. J'ai perdu du temps avec le câblage du capteur MLX90614 en interprétant mal la datasheet (vue de dessus, vue de dessous).
 
 Une des difficultés qui m'a fait perdre le plus de temps a été un problème avec le moteur de l'axe Y. Le signal de la sortie (Y1B) était étrange et le moteur ne faisait que des oscillations. Nous avons changé le driver moteur (A3967) ce qui n'a pas résolu le problème. J'ai finalement découvert qu'une pin touchait le blindage du connecteur USB de l'arduino - un problème fréquent.
 
+Temps de lecture
+-----------------
+
+Au début, j'ai essayé d'obtenir la vitesse de déplacement la plus rapide afin de réduire le temps d'acquisition. Les premiers résultats avaient une succession de valeurs identiques (5,6 pixels). Le problème vient du temps de réaction du capteur (la datasheet n'en parle apparemment pas). Pour résoudre le problème, j'ai dû augmenter le temps entre les mesures à 90ms. Ce delay rallonge considérablement le temps de mesure.
+
+
+Calibration
+------------
+
+Pour calibrer, j'ai utilisé le laser et des lignes sur le murs. Il y a une petite dérive (perte de pas) que j'ai corrigé "en dure" dans le sketch arduino.
 

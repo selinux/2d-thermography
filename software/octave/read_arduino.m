@@ -26,13 +26,14 @@ close all
 
 COLORS = 1024;
 
-x = 80;
-y = 20;
+x = 100;
+y = 25;
 
 surface = strcat(num2str(x),",",num2str(y),"\n")
 
 img = zeros(y,x);
-s0 = serial("/dev/ttyACM0", 115200)
+capteur = zeros(1,y);     % une valeur capteur par ligne
+s0 = serial("/dev/ttyACM1", 115200)
 pause(5); % arduino reset after serial connexion...wait end of homing
 
 srl_write(s0, surface);
@@ -69,9 +70,9 @@ while( l <= y )
     
   endwhile
   data = srl_read(s0,4);
-  %img(j,x+1) = str2num(char(data));
+  
+  capteur(1,l) = str2num(char(data));
   l++;
-  %srl_flush(s0);
 endwhile
 
 srl_close(s0);
@@ -79,6 +80,9 @@ srl_close(s0);
 %img = img;
 minimum = min(min(img));
 maximum = max(max(img));
+min_capt = min(capteur);
+max_capt = max(capteur);
+moy_capteur = sum(capteur(:,1))/size(capteur)(1)
 
 % normalize image values from 0 to 255
 %img1 = img .- min;
@@ -102,9 +106,13 @@ minimum
 maximum
 delta = maximum - minimum
 
+min_capt = min(capteur)/100
+max_capt = max(capteur)/100
+moy_capteur = sum(capteur(:,1))/size(capteur)(1)./100
+
 title ("Thermogram");
 xlabel ("largeur");
 ylabel ("longueur");
 
-output = colorbar
-saveas(output, "image")
+caxis([minimum maximum]);
+colorbar

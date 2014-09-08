@@ -53,12 +53,14 @@
 #define PIN_ENDX        10
 #define PIN_ENDY        11
 #define PIN_LASER       12
+#define PIN_DEBUG       13
 
 #define MOTX            0
 #define MOTY            1
 #define INIT_STEPX      110
 #define INIT_STEPY      110
 #define SPEED           2
+#define READDELAY       90
 
 enum MS { FULL=1, HALF=2, QUART=4, EIGHTH=8 };
 
@@ -85,7 +87,7 @@ void setup()
     /* init motors 
      * *****************/
     DDRD = B11001100;         // set pins 2,3,6,7 as OUTPUT
-    DDRB = B00010000;         // set pins 12 as OUTPUT
+    DDRB = B00110000;         // set pins 12 as OUTPUT + debug
   
     /* force laser LOW just in case !!!! */
     digitalWrite(PIN_LASER, LOW);
@@ -127,6 +129,7 @@ void setup()
 
     digitalWrite(PIN_DIRX, FW_X);
     digitalWrite(PIN_DIRY, FW_Y);
+    digitalWrite(PIN_DEBUG, LOW);
 
     initPos(MOTX);
     initPos(MOTY);
@@ -170,6 +173,7 @@ void loop(){
         for ( j=0; j < size_y; j++ ){
     
             for ( i=0; i < size_x; i++ ){
+              
                 if( j%2 == 0 )
                     step(1, FW_X, MOTX);
                 else
@@ -177,31 +181,26 @@ void loop(){
 
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
-                delay(100);
+                delay(READDELAY);
                 //Serial.print(",");
             }
     
-//  test correction de dephasage
-//            if( j%2 == 0 )
-//                step(14, FW_X, MOTX);
-//            else
-//                step(14, BW_X, MOTX);
-
             /* move backward */
             //step( size_x*2, BW_X, MOTX);
 
             /* lost step correction */
-            if( j%2 == 0 )
-                step(3, BW_X, MOTX);
-            else
-                step(3, FW_X, MOTX);
+//            if( j%2 == 0 )
+//                step(3, BW_X, MOTX);
+//            else
+//                step(3, FW_X, MOTX);
 
             /* at the EOL, ambient temperature is sent */
             tpl = readMLXtemperature(1);
             Serial.print(tpl);
-    
+            
             /* Go one line down (motor up) */
             step(1, FW_Y, MOTY);
+//            delay(5);
         }
 
         delay(1000);
