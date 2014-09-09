@@ -12,8 +12,8 @@ will be done by octave.
 ![ScreenShot](media/source_mesure.png)
 
     scan duration 10min
-
-[video...](http://youtu.be/shVt-1LP7H4)
+[video exemple 1](http://youtu.be/MxMDqLkLDO0)
+[video exemple 2](http://youtu.be/shVt-1LP7H4)
 
 ![ScreenShot](media/2d-thermography-harware_4.jpg )
 
