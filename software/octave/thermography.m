@@ -31,8 +31,8 @@ close all
 %=====================================
 
 COLORS = 1024;
-x = 100;
-y = 60;
+x = 40;
+y = 20;
 % micro stepping values [1,2,4,8] (1,1/2,1/4,1/8)
 ms_x = 4;
 ms_y = 4;
@@ -64,7 +64,7 @@ do
 until ((exist(device) == 2) && d < 10)
 
 % open it
-s0 = serial(device, 115200);
+s0 = serial(device, 57600);
 
 % the arduino make a hard reset when a connexion is activated so wait 
 % unitil the homing finished
@@ -95,9 +95,8 @@ while( l <= y )
 
     mesure = str2num(char(data)); % Convert uint8 array to string, 
     mesure = mesure/100;
-    %dump = srl_read(s0,1);
     % values are read in both direction
-    if(mod(l,2) == 1 )     
+    if(mod(l,2) == 1 )     % line 0(arduino) == 1(octave)
       img(l,k) = mesure;
     else
       img(l,x-k+1) = mesure; % enter value backward

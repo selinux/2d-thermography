@@ -80,7 +80,7 @@ boolean start_scan = false;
 void setup() 
 {            
 
-    Serial.begin(115200);
+    Serial.begin(57600);
     Serial.println("Init MLX90614 temperature Sensor");
   
     PORTC = (1 << PORTC4) | (1 << PORTC5);  //enable internal pullup resistors on i2c ports
@@ -154,29 +154,38 @@ void loop(){
     
             for ( i=0; i < size_x; i++ ){
               
-                if( j%2 == 0 )
+                if( j%2 == 0 ){
                     step(1, FW_X, MOTX);
-                else
+                    //tpl = 1000;   // debug value
+                }else{
                     step(1, BW_X, MOTX);
-
+                    //tpl = 2000;   // debug value
+                }
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
                 delay(read_delay);
-                //Serial.print(",");
+
             }
     
             /* move backward */
             //step( size_x*2, BW_X, MOTX);
 
             /* lost step correction */
-            if( j%2 == 0 )
-                step(3, BW_X, MOTX);
-            else
-                step(3, FW_X, MOTX);
+//            if( j%2 == 0 )
+//                step(3, BW_X, MOTX);
+//            else
+//                step(3, FW_X, MOTX);
 
             /* at the EOL, ambient temperature is sent */
             tpl = readMLXtemperature(1);
             Serial.print(tpl);
+            
+            /* debug test 10 times to be sur the MLX buffer s empty */
+            for(int u=0;u<10;u++){
+                  tpl = readMLXtemperature(1);
+                  delay(read_delay);
+            }
+
             
             /* Go one line down (motor up) */
             step(1, FW_Y, MOTY);
