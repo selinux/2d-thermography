@@ -1,0 +1,126 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr} % Titre courant
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{authblk}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\definecolor{dkgreen}{rgb}{0,0.4,0}
+\definecolor{dkred}{rgb}{0.4,0,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+\usepackage{lastpage} % pour avoir \pageref{LastPage} : le nombre total de pages du doc
+\usepackage{wasysym}   % smiley, frownie
+
+%% Packages pour les tableaux
+\usepackage{array}     % Outils 0suppl<E9>mentaires
+\usepackage{multirow}  % Colonnes multiples
+\usepackage[table]{xcolor}
+\usepackage{tabularx}  % Largeur totale donne
+\usepackage{longtable} % sur plusieurs pages
+
+%supprime toute indentation de paragraphe
+\setlength{\parindent}{0cm}
+
+
+\title{Thermographie 2d }
+\author{Sebastien Chassot \\ sebastien.chassot@etu.hesge.ch}
+\affil{HES-SO - hepia - section ITI \\ Université d'été}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+\hypersetup{pdfauthor=Sebastien Chassot}
+\hypersetup{pdfstartpage=1}
+\hypersetup{pdfpagemode=None} %FullScreen, None
+\hypersetup{pdfpagelayout=SinglePage} %SinglePage, OneColumn, TwoColumnLeft, TwoColumnRight
+\hypersetup{pdfstartview=FitH} %Fit, FitH, FitV, FitB, FitBH, FitBV
+\pdfcompresslevel=9
+
+%infos sur le document : auteur, titre, version (utilis<E9>es en page de garde, pied de page, filigrane...)
+\newcommand{\docauthor}{Sebastien Chassot}
+\newcommand{\docversion}{}
+\newcommand{\doctitle}{Université d'été - Thermographie 2d }
+%date du document
+%\newcommand{\docdateddmmyy}{31/05/2013}
+%\newcommand{\docdatemmyy}{05/2013}
+\newcommand{\class}{hepia ITI}
+%----------------------------------------------------------
+
+% Entte et pied de page.
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{1pt}
+%\renewcommand{\headrulewidth}{1pt}
+\fancyfoot[C]{\scriptsize\emph{\class}}
+\fancyfoot[R]{\scriptsize\emph{Page~\thepage~sur~\pageref{LastPage}}}
+\fancyfoot[L]{\scriptsize\emph{\docauthor{}}}
+%\footheight{100pt}
+%\setlength{\headheight}{50pt} 
+%%\renewcommand*\contentsname{\vspace{0.5cm}}
+%\fancyhead[L]{Sebastien Chassot}
+\fancyhead[C]{\textsc{Thermographie 2d}}
+%\fancyhead[R]{hepia ITI}
+
+%\fancypagestyle{plain}{%
+%\fancyhf{} % clear all header and footer fields
+%\fancyfoot[C]{} % except the center
+%\renewcommand{\headrulewidth}{1pt}
+%\renewcommand{\footrulewidth}{0pt}
+%\fancyhead[L]{Sebastien Chassot}
+%\fancyhead[C]{\textsc{TP introduction Matlab}}
+%\fancyhead[R]{hepia ITI}
+%}
+
+\begin{document}
+\maketitle
+
+
+
+%%\tableofcontents
+
+\section*{Introduction}
+
+Le but de ce travail est de générer un thermogramme à l'aide d'un thermomètre infrarouge.\\
+
+Deux moteurs pas-à-pas permettent d'orienter un capteur IR en 2 dimensions. Ce mécanisme permet de scanner une surface (X-Y). Pour chaque coordonnée, une mesure de température est effectuée. Au final, les données permettent de générer une cartographie thermique de la surface sous forme d'image (ou thermogramme).
+
+\section*{Cahier des charges}
+
+Le projet se subdivise en 3 parties :
+
+\begin{enumerate}
+\item La partie matérielle avec un micro-contrôleur gérant le positionnement du capteur, les mesures et la transmission vers un PC.
+\item Le flux de données reçues est stocké dans un fichier.
+\item Un traitement mathématique pour générer une image.
+\end{enumerate}
+
+\subsection*{Matériel}
+
+Un arduino gère le positionnement du capteur, la mesure et la transmission vers un PC.
+
+Le but est d'avoir un positionnement le plus précis possible (gestion du micro stepping), d'éviter les vibrations lors des déplacements et de gérer les accélérations tout en synchronisant la mesure.
+
+Le thermomètre a deux modes de fonctionnement. Il peut transmettre les données via un bus 2wire ou en continu en PWM (10bits). Trouver le meilleur moyen d'acquérir une mesure fiable.
+
+Transmission via un lien série.
+
+
+\subsection*{Logiciel}
+
+Le but est choisir les données à acquérir depuis un PC et de récupérer le flux de donnée, éventuellement le remettre "dans l'ordre" et les stocker dans un fichier.
+
+\subsection*{Traitement d'image}
+
+Avec octave afficher les données év, utiliser un algorithme pour améliorer la résolution et le contraste.
+
+%%% Body
+
+
+
+\end{document}

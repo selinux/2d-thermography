@@ -1,9 +1,9 @@
 %/
  %=============================================================================
  %
- %       Filename:  read_arduino.m
+ %       Filename:  thermography.m
  %
- %    Description:  read serial data from arduino
+ %    Description:  read serial data from arduino (temperatures) and render an image 
  %
  %       Version:   1.0
  %       Created:   31. 08. 14 19:10:11
@@ -19,13 +19,18 @@
 clear all
 close all
 
-
 % load pakage for serial communication
 % http://wiki.octave.org/Instrument_control_package
 % pkg load instrument_control
 
-COLORS = 1024;
 
+%-------------------------------------
+%
+% init variables
+%
+%=====================================
+
+COLORS = 1024;
 x = 100;
 y = 60;
 % micro stepping values [1,2,4,8] (1,1/2,1/4,1/8)
@@ -36,11 +41,19 @@ ms_y = 4;
 % 1 is too short, 90-100ms give finest scan (higher value is a waste of time)
 r_delay = 90;
 
+% string to be passed to arduino
 DATAS = strcat(num2str(x),",",num2str(y),",",num2str(ms_x),",",num2str(ms_y),",",num2str(r_delay),"\n");
 
+
+% init empty matrice 
 img = zeros(y,x);
 capteur = zeros(1,y);     % une valeur capteur par ligne
 
+
+
+%------------------------------------
+% look for a valid serial port
+%====================================
 d = -1;
 
 do 
@@ -50,20 +63,27 @@ do
     
 until ((exist(device) == 2) && d < 10)
 
-s0 = serial(device, 115200)
+% open it
+s0 = serial(device, 115200);
 
-pause(5); % arduino reset after serial connexion...wait end of homing
+% the arduino make a hard reset when a connexion is activated so wait 
+% unitil the homing finished
+pause(5);
 
+% send the scan command
 srl_write(s0, DATAS);
 srl_flush(s0);
 
-
+% wait for the begining of datas
 while(char(srl_read(s0,1)) != "#" )
   % do nothing
 endwhile
-start_time = time;
 
 srl_read(s0,2); % skip \n
+
+% time counter
+start_time = time;
+
 
 l = 1;
 while( l <= y )

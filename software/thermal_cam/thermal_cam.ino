@@ -66,6 +66,7 @@ enum MS { FULL=1, HALF=2, QUART=4, EIGHTH=8 };
 
 enum MS ms_x = HALF;
 enum MS ms_y = HALF;
+
 void ms_step(MS ms_x, MS ms_y);
 
 /* size to scan */
@@ -85,19 +86,17 @@ void setup()
     PORTC = (1 << PORTC4) | (1 << PORTC5);  //enable internal pullup resistors on i2c ports
   
     Serial.println("Init motors");
-    /* init motors 
-     * *****************/
+    
+    /* ----------------------
+     * init motors 
+     * **********************/
     DDRD = B11001100;         // set pins 2,3,6,7 as OUTPUT
     DDRB = B00110000;         // set pins 12 as OUTPUT + debug
   
+  
     /* force laser LOW just in case !!!! */
     digitalWrite(PIN_LASER, LOW);
-    /* Set micro stepping 
-    * sample : pins 4,5,8,9 HIGH (1/8 step) 
-    * MS1 = L, MS2 = L   >  Full step 
-    * MS1 = H, MS2 = L   >  Half step 
-    * MS1 = L, MS2 = H   >  Quarter step 
-    * MS1 = H, MS2 = H   >  Eighth step */
+ 
     ms_step(ms_x, ms_y);
 
 
@@ -181,14 +180,12 @@ void loop(){
             
             /* Go one line down (motor up) */
             step(1, FW_Y, MOTY);
-//            delay(5);
+
         }
 
-        delay(1000);
         /* move back to origin and turn the laser off */
         step( (size_y/2), BW_Y, MOTY);
         step( (size_x/2), BW_X, MOTX);
-//        digitalWrite(PIN_LASER, LOW);
 
         start_scan = false;
 
@@ -199,12 +196,24 @@ void loop(){
     }
 }
 
-
-/*  move the motor 0 or 1 (X/Y)
- *  int nb = signed number of step (sign = direction )
+/**
+ * @brief move motor 0 or 1 (X/Y) n step
+ *
+ * @param nb number of step
+ *
+ * @param dir 0 or 1 (BW_X,FW_X)
+ *
+ * @param motor motor number
+ *
  */
-int step( int nb, int dir, byte motor ){
+void step( int nb, int dir, byte motor ){
 
+   /* Set micro stepping 
+    * sample : pins 4,5,8,9 HIGH (1/8 step) 
+    * MS1 = L, MS2 = L   >  Full step 
+    * MS1 = H, MS2 = L   >  Half step 
+    * MS1 = L, MS2 = H   >  Quarter step 
+    * MS1 = H, MS2 = H   >  Eighth step */
     int i = 0;
     if( motor == MOTX ){     
  
@@ -219,7 +228,7 @@ int step( int nb, int dir, byte motor ){
             delay(SPEED);               
         }
  
-    }else if( motor == MOTY){
+    }else{
  
         /* select direction */
         digitalWrite(PIN_DIRY, dir);
@@ -231,44 +240,45 @@ int step( int nb, int dir, byte motor ){
             PORTD &= ~(1<<PIN_STPY);    // X step low
             delay(SPEED);             
         }
-        
- 
-    }else{
-
-        return 1;
     }
- 
-    return 0;
 }
 
 
-/****************************************************************
+/**
+ * @brief read MLX90614 i2c ambient or object temperature
  *
- * read MLX90614 i2c ambient or object temperaturei
+ * @param TaTo 0 = object temp and 1 = MLX90614 temp 
  *
- ****************************************************************/
-
+ * @return the temperature in degre * 10^2
+ *
+ */
 long int readMLXtemperature(int TaTo) {
     long int lii = 0;
     int dlsb,dmsb,pec;
     int dev = 0x5A<<1;
 
     i2c_init();
-    i2c_start_wait(dev+I2C_WRITE);  // set device address and write mode
+    i2c_start_wait(dev+I2C_WRITE);             // set device address and write mode
 
-    (TaTo)? i2c_write(0x06) : i2c_write(0x07); // or command read object or ambient temperature
-    i2c_rep_start(dev+I2C_READ);    // set device address and read mode
-    dlsb = i2c_readAck();           // read data lsb
-    dmsb = i2c_readAck();           // read data msb
+    (TaTo)? i2c_write(0x06) : i2c_write(0x07); // command read object or ambient temperature
+    i2c_rep_start(dev+I2C_READ);               // set device address and read mode
+    dlsb = i2c_readAck();                      // read data lsb
+    dmsb = i2c_readAck();                      // read data msb
     pec = i2c_readNak();
     i2c_stop();
 
     lii=dmsb*0x100+dlsb;
     
     
-    return(lii*2-27315);            // return degre*100 
+    return(lii*2-27315);                       // return degre*100 (conversion done by octave)
 }
 
+/**
+ * @brief bring the motor to the endstop and move in midle position
+ *
+ * @param motor number (0 or 1)
+ *
+ */
 void initPos( byte motor ){
 
     boolean end;
