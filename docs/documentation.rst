@@ -54,3 +54,7 @@ Calibration
 
 Pour calibrer, j'ai utilisé le laser et des lignes sur le murs. Il y a une petite dérive (perte de pas) que j'ai corrigé "en dure" dans le sketch arduino.
 
+Test de la communication
+-------------------------
+
+Pour tester la communication, une constante (10) est envoyée à l'aller et une autre (20). En testant à 115200 bauds, il y avait des erreurs de transmission (réception de 0.1 au lieu de 10)
