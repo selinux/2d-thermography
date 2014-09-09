@@ -66,7 +66,7 @@ enum MS { FULL=1, HALF=2, QUART=4, EIGHTH=8 };
 
 enum MS ms_x = HALF;
 enum MS ms_y = HALF;
-
+void ms_step(MS ms_x, MS ms_y);
 
 /* size to scan */
 int size_x = 0;
@@ -98,35 +98,8 @@ void setup()
     * MS1 = H, MS2 = L   >  Half step 
     * MS1 = L, MS2 = H   >  Quarter step 
     * MS1 = H, MS2 = H   >  Eighth step */
-    switch( ms_x ){
-        case HALF:
-            digitalWrite(MS1_X, HIGH);
-            break;
-        case QUART:
-            digitalWrite(MS2_X, HIGH);
-            break;
-        case EIGHTH:
-            digitalWrite(MS1_X, HIGH);
-            digitalWrite(MS2_X, HIGH);
-            break;
-        case FULL:
-            break;
-    }
+    ms_step(ms_x, ms_y);
 
-    switch( ms_y ){
-        case HALF:
-            digitalWrite(MS1_Y, HIGH);
-            break;
-        case QUART:
-            digitalWrite(MS2_Y, HIGH);
-            break;
-        case EIGHTH:
-            digitalWrite(MS1_Y, HIGH);
-            digitalWrite(MS2_Y, HIGH);
-            break;
-        case FULL:
-            break;
-    }
 
     digitalWrite(PIN_DIRX, FW_X);
     digitalWrite(PIN_DIRY, FW_Y);
@@ -149,9 +122,12 @@ void loop(){
     // look for the next valid integer in the incoming serial stream:
     size_x = Serial.parseInt();
     size_y = Serial.parseInt();
+    
     ms_x = (MS)Serial.parseInt();
     ms_y = (MS)Serial.parseInt();
+    
     int read_delay = Serial.parseInt();
+    
     
     if ( size_x != 0 && size_y != 0 ){
         Serial.print(size_x);
@@ -163,8 +139,12 @@ void loop(){
 
 
     if(start_scan == true){
+
         Serial.println("start scan #");
+
         digitalWrite(PIN_LASER, HIGH);
+        ms_step(ms_x, ms_y);
+
 
         // Go to upper line (to do so motor goes down)
         step( (size_y/2), BW_Y, MOTY);
@@ -190,10 +170,10 @@ void loop(){
             //step( size_x*2, BW_X, MOTX);
 
             /* lost step correction */
-//            if( j%2 == 0 )
-//                step(3, BW_X, MOTX);
-//            else
-//                step(3, FW_X, MOTX);
+            if( j%2 == 0 )
+                step(3, BW_X, MOTX);
+            else
+                step(3, FW_X, MOTX);
 
             /* at the EOL, ambient temperature is sent */
             tpl = readMLXtemperature(1);
@@ -207,7 +187,7 @@ void loop(){
         delay(1000);
         /* move back to origin and turn the laser off */
         step( (size_y/2), BW_Y, MOTY);
-        step( (size_x/2), FW_X, MOTX);
+        step( (size_x/2), BW_X, MOTX);
 //        digitalWrite(PIN_LASER, LOW);
 
         start_scan = false;
@@ -331,3 +311,35 @@ void initPos( byte motor ){
 
 }
 
+void ms_step(MS ms_x, MS ms_y){
+  
+    switch( ms_x ){
+        case HALF:
+            digitalWrite(MS1_X, HIGH);
+            break;
+        case QUART:
+            digitalWrite(MS2_X, HIGH);
+            break;
+        case EIGHTH:
+            digitalWrite(MS1_X, HIGH);
+            digitalWrite(MS2_X, HIGH);
+            break;
+        case FULL:
+            break;
+    }
+
+    switch( ms_y ){
+        case HALF:
+            digitalWrite(MS1_Y, HIGH);
+            break;
+        case QUART:
+            digitalWrite(MS2_Y, HIGH);
+            break;
+        case EIGHTH:
+            digitalWrite(MS1_Y, HIGH);
+            digitalWrite(MS2_Y, HIGH);
+            break;
+        case FULL:
+            break;
+    }
+}
