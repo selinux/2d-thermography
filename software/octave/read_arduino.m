@@ -27,16 +27,34 @@ close all
 COLORS = 1024;
 
 x = 100;
-y = 25;
+y = 60;
+% micro stepping values [1,2,4,8] (1,1/2,1/4,1/8)
+ms_x = 4;
+ms_y = 4;
 
-surface = strcat(num2str(x),",",num2str(y),"\n")
+% delay between mesure from 1ms to Tms
+% 1 is too short, 90-100ms give finest scan (higher value is a waste of time)
+r_delay = 90;
+
+DATAS = strcat(num2str(x),",",num2str(y),",",num2str(ms_x),",",num2str(ms_y),",",num2str(r_delay),"\n");
 
 img = zeros(y,x);
 capteur = zeros(1,y);     % une valeur capteur par ligne
-s0 = serial("/dev/ttyACM1", 115200)
+
+d = -1;
+
+do 
+
+    d++;
+    device = strcat("/dev/ttyACM",num2str(d));
+    
+until ((exist(device) == 2) && d < 10)
+
+s0 = serial(device, 115200)
+
 pause(5); % arduino reset after serial connexion...wait end of homing
 
-srl_write(s0, surface);
+srl_write(s0, DATAS);
 srl_flush(s0);
 
 

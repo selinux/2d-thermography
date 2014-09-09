@@ -60,17 +60,18 @@
 #define INIT_STEPX      110
 #define INIT_STEPY      110
 #define SPEED           2
-#define READDELAY       90
+//#define READDELAY       90
 
 enum MS { FULL=1, HALF=2, QUART=4, EIGHTH=8 };
 
-enum MS ms_x = QUART;
-enum MS ms_y = QUART;
+enum MS ms_x = HALF;
+enum MS ms_y = HALF;
 
 
 /* size to scan */
 int size_x = 0;
 int size_y = 0;
+int r_delay = 90;
 
 boolean start_scan = false;
 
@@ -133,6 +134,8 @@ void setup()
 
     initPos(MOTX);
     initPos(MOTY);
+    
+    digitalWrite(PIN_LASER, HIGH);
 }
 
 
@@ -144,14 +147,12 @@ void loop(){
 
 
     // look for the next valid integer in the incoming serial stream:
-    int size_x = Serial.parseInt();
-    // do it again:
-    int size_y = Serial.parseInt();
-
-    // debug
-    //size_x = 400;
-    //size_y = 20;
-
+    size_x = Serial.parseInt();
+    size_y = Serial.parseInt();
+    ms_x = (MS)Serial.parseInt();
+    ms_y = (MS)Serial.parseInt();
+    int read_delay = Serial.parseInt();
+    
     if ( size_x != 0 && size_y != 0 ){
         Serial.print(size_x);
         Serial.print(" ");
@@ -181,7 +182,7 @@ void loop(){
 
                 tpl = readMLXtemperature(0);
                 Serial.print(tpl);
-                delay(READDELAY);
+                delay(read_delay);
                 //Serial.print(",");
             }
     
@@ -207,7 +208,7 @@ void loop(){
         /* move back to origin and turn the laser off */
         step( (size_y/2), BW_Y, MOTY);
         step( (size_x/2), FW_X, MOTX);
-        digitalWrite(PIN_LASER, LOW);
+//        digitalWrite(PIN_LASER, LOW);
 
         start_scan = false;
 
