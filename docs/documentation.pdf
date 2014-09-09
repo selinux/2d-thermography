@@ -1,7 +1,7 @@
 %PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
-<< /F1 2 0 R /F2 4 0 R /F3 16 0 R >>
+<< /F1 2 0 R /F2 4 0 R /F3 22 0 R >>
 endobj
 2 0 obj
 << /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
@@ -19,77 +19,104 @@ endobj
 << /A << /S /URI /Type /Action /URI (mailto:sebastien.chassot@etu.hesge.ch) >> /Border [ 0 0 0 ] /Rect [ 243.2223 704.9336 393.4523 716.9336 ] /Subtype /Link /Type /Annot >>
 endobj
 6 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 630.8372 0 ] /Rect [ 62.69291 556.5872 132.7029 568.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 630.8372 0 ] /Rect [ 62.69291 556.5872 132.7029 568.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 7 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 630.8372 0 ] /Rect [ 527.0227 556.5872 532.5827 568.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 630.8372 0 ] /Rect [ 527.0227 556.5872 532.5827 568.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 8 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 440.4907 0 ] /Rect [ 82.69291 538.5872 148.2729 550.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 386.4907 0 ] /Rect [ 82.69291 538.5872 148.2729 550.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 9 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 440.4907 0 ] /Rect [ 527.0227 538.5872 532.5827 550.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 386.4907 0 ] /Rect [ 527.0227 538.5872 532.5827 550.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 10 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 410.4907 0 ] /Rect [ 102.6929 520.5872 154.9429 532.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 356.4907 0 ] /Rect [ 102.6929 520.5872 154.9429 532.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 11 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 410.4907 0 ] /Rect [ 527.0227 520.5872 532.5827 532.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 356.4907 0 ] /Rect [ 527.0227 520.5872 532.5827 532.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 12 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 311.4907 0 ] /Rect [ 102.6929 502.5872 138.2529 514.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 257.4907 0 ] /Rect [ 102.6929 502.5872 138.2529 514.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 13 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 311.4907 0 ] /Rect [ 527.0227 502.5872 532.5827 514.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 23 0 R /XYZ 62.69291 257.4907 0 ] /Rect [ 527.0227 502.5872 532.5827 514.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 14 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 146.4907 0 ] /Rect [ 102.6929 484.5872 141.6029 496.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 765.0236 0 ] /Rect [ 102.6929 484.5872 141.6029 496.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 15 0 obj
-<< /Border [ 0 0 0 ] /Contents () /Dest [ 17 0 R /XYZ 62.69291 146.4907 0 ] /Rect [ 527.0227 484.5872 532.5827 496.5872 ] /Subtype /Link /Type /Annot >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 765.0236 0 ] /Rect [ 527.0227 484.5872 532.5827 496.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 16 0 obj
-<< /BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 654.0236 0 ] /Rect [ 102.6929 466.5872 179.9429 478.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 17 0 obj
-<< /Annots [ 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 
-  15 0 R ] /Contents 28 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 27 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] /XObject << /FormXob.2ff77f4a2e2b02036b0d80a05daa2b2c 3 0 R >> >> /Rotate 0 
-  /Trans <<  >> /Type /Page >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 654.0236 0 ] /Rect [ 527.0227 466.5872 532.5827 478.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 18 0 obj
-<< /Contents 29 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 27 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
-  /Type /Page >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 561.0236 0 ] /Rect [ 102.6929 448.5872 205.1929 460.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 19 0 obj
-<< /Outlines 21 0 R /PageLabels 30 0 R /PageMode /UseNone /Pages 27 0 R /Type /Catalog >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 561.0236 0 ] /Rect [ 527.0227 448.5872 532.5827 460.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 20 0 obj
-<< /Author () /CreationDate (D:20140908120634-01'00') /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
-  /Title () >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 504.0236 0 ] /Rect [ 102.6929 430.5872 150.4829 442.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 21 0 obj
-<< /Count 7 /First 22 0 R /Last 22 0 R /Type /Outlines >>
+<< /Border [ 0 0 0 ] /Contents () /Dest [ 24 0 R /XYZ 62.69291 504.0236 0 ] /Rect [ 527.0227 430.5872 532.5827 442.5872 ] /Subtype /Link /Type /Annot >>
 endobj
 22 0 obj
-<< /Count 4 /Dest [ 17 0 R /XYZ 62.69291 630.8372 0 ] /First 23 0 R /Last 23 0 R /Parent 21 0 R /Title (Thermographe) >>
+<< /BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font >>
 endobj
 23 0 obj
-<< /Count 3 /Dest [ 17 0 R /XYZ 62.69291 440.4907 0 ] /First 24 0 R /Last 26 0 R /Parent 22 0 R /Title (Thermographe) >>
+<< /Annots [ 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 
+  15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R ] /Contents 37 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 36 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] /XObject << /FormXob.2ff77f4a2e2b02036b0d80a05daa2b2c 3 0 R >> >> /Rotate 0 
+  /Trans <<  >> /Type /Page >>
 endobj
 24 0 obj
-<< /Dest [ 17 0 R /XYZ 62.69291 410.4907 0 ] /Next 25 0 R /Parent 23 0 R /Title (Introduction) >>
+<< /Contents 38 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 36 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
 endobj
 25 0 obj
-<< /Dest [ 17 0 R /XYZ 62.69291 311.4907 0 ] /Next 26 0 R /Parent 23 0 R /Prev 24 0 R /Title (Mat\351riel) >>
+<< /Outlines 27 0 R /PageLabels 39 0 R /PageMode /UseNone /Pages 36 0 R /Type /Catalog >>
 endobj
 26 0 obj
-<< /Dest [ 17 0 R /XYZ 62.69291 146.4907 0 ] /Parent 23 0 R /Prev 25 0 R /Title (Montage) >>
+<< /Author () /CreationDate (D:20140909191455-01'00') /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
 endobj
 27 0 obj
-<< /Count 2 /Kids [ 17 0 R 18 0 R ] /Type /Pages >>
+<< /Count 10 /First 28 0 R /Last 28 0 R /Type /Outlines >>
 endobj
 28 0 obj
-<< /Length 7366 >>
+<< /Count 7 /Dest [ 23 0 R /XYZ 62.69291 630.8372 0 ] /First 29 0 R /Last 29 0 R /Parent 27 0 R /Title (Thermographe) >>
+endobj
+29 0 obj
+<< /Count 6 /Dest [ 23 0 R /XYZ 62.69291 386.4907 0 ] /First 30 0 R /Last 35 0 R /Parent 28 0 R /Title (Thermographe) >>
+endobj
+30 0 obj
+<< /Dest [ 23 0 R /XYZ 62.69291 356.4907 0 ] /Next 31 0 R /Parent 29 0 R /Title (Introduction) >>
+endobj
+31 0 obj
+<< /Dest [ 23 0 R /XYZ 62.69291 257.4907 0 ] /Next 32 0 R /Parent 29 0 R /Prev 30 0 R /Title (Mat\351riel) >>
+endobj
+32 0 obj
+<< /Dest [ 24 0 R /XYZ 62.69291 765.0236 0 ] /Next 33 0 R /Parent 29 0 R /Prev 31 0 R /Title (Montage) >>
+endobj
+33 0 obj
+<< /Dest [ 24 0 R /XYZ 62.69291 654.0236 0 ] /Next 34 0 R /Parent 29 0 R /Prev 32 0 R /Title (Temps de lecture) >>
+endobj
+34 0 obj
+<< /Dest [ 24 0 R /XYZ 62.69291 561.0236 0 ] /Next 35 0 R /Parent 29 0 R /Prev 33 0 R /Title (Deformation de l'image) >>
+endobj
+35 0 obj
+<< /Dest [ 24 0 R /XYZ 62.69291 504.0236 0 ] /Parent 29 0 R /Prev 34 0 R /Title (Calibration) >>
+endobj
+36 0 obj
+<< /Count 2 /Kids [ 23 0 R 24 0 R ] /Type /Pages >>
+endobj
+37 0 obj
+<< /Length 7708 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
@@ -158,7 +185,7 @@ q
 1 0 0 1 91.03937 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (26.08.2014 \( generated by ReST 08.09.2014 at 12:06 \)) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (26.08.2014 \( generated by ReST 09.09.2014 at 19:14 \)) Tj T* ET
 Q
 Q
 q
@@ -202,17 +229,17 @@ BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Contents) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 480.8372 cm
+1 0 0 1 62.69291 426.8372 cm
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 0 75 cm
+1 0 0 1 0 129 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Thermographe) Tj T* ET
 Q
 Q
 q
-1 0 0 1 397.8898 75 cm
+1 0 0 1 397.8898 129 cm
 q
 0 0 .501961 rg
 0 0 .501961 RG
@@ -220,9 +247,51 @@ BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
 Q
 Q
 q
-1 0 0 1 0 57 cm
+1 0 0 1 0 111 cm
 q
 BT 1 0 0 1 20 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Thermographe) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 111 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 93 cm
+q
+BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Introduction) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 93 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 75 cm
+q
+BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Mat\351riel) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 75 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 57 cm
+q
+BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Montage) Tj T* ET
 Q
 Q
 q
@@ -230,13 +299,13 @@ q
 q
 0 0 .501961 rg
 0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (2) Tj T* -66.44 0 Td ET
 Q
 Q
 q
 1 0 0 1 0 39 cm
 q
-BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Introduction) Tj T* ET
+BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Temps de lecture) Tj T* ET
 Q
 Q
 q
@@ -244,13 +313,13 @@ q
 q
 0 0 .501961 rg
 0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (2) Tj T* -66.44 0 Td ET
 Q
 Q
 q
 1 0 0 1 0 21 cm
 q
-BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Mat\351riel) Tj T* ET
+BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Deformation de l'image) Tj T* ET
 Q
 Q
 q
@@ -258,13 +327,13 @@ q
 q
 0 0 .501961 rg
 0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (2) Tj T* -66.44 0 Td ET
 Q
 Q
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Montage) Tj T* ET
+BT 1 0 0 1 40 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Calibration) Tj T* ET
 Q
 Q
 q
@@ -272,53 +341,53 @@ q
 q
 0 0 .501961 rg
 0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 66.44 0 Td (2) Tj T* -66.44 0 Td ET
 Q
 Q
 q
 Q
 Q
 q
-1 0 0 1 62.69291 452.4907 cm
+1 0 0 1 62.69291 398.4907 cm
 n 0 14.17323 m 469.8898 14.17323 l S
 Q
 q
-1 0 0 1 62.69291 422.4907 cm
+1 0 0 1 62.69291 368.4907 cm
 q
 BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Thermographe) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 395.4907 cm
+1 0 0 1 62.69291 341.4907 cm
 q
 BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (Introduction) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 377.4907 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Le but de ce travail \351tait de g\351n\351rer un thermogramme \340 l\222aide d\222un thermom\350tre infrarouge.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 62.69291 323.4907 cm
 q
 0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Le but de ce travail \351tait de g\351n\351rer un thermogramme \340 l\222aide d\222un thermom\350tre infrarouge.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 269.4907 cm
+q
+0 0 0 rg
 BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .494983 Tw (Deux moteurs pas-\340-pas permettent d\222orienter un capteur IR en 2 dimensions. Ce m\351canisme permet de) Tj T* 0 Tw .332126 Tw (scanner une surface \(X-Y\). Pour chaque coordonn\351e, une mesure de temp\351rature est effectu\351e. Au final,) Tj T* 0 Tw 1.564269 Tw (les donn\351es permettent de g\351n\351rer une cartographie thermique de la surface sous forme d\222image \(ou) Tj T* 0 Tw (thermogramme\).) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 296.4907 cm
+1 0 0 1 62.69291 242.4907 cm
 q
 BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (Mat\351riel) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 284.4907 cm
+1 0 0 1 62.69291 230.4907 cm
 Q
 q
-1 0 0 1 62.69291 158.4907 cm
+1 0 0 1 62.69291 104.4907 cm
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -500,20 +569,7 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 158.4907 cm
-Q
-q
-1 0 0 1 62.69291 131.4907 cm
-q
-BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (Montage) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 101.4907 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.803735 Tw (Le montage a \351t\351 relativement facile. J'ai perdu du temps avec le c\342blage du capteur MLX90614 en) Tj T* 0 Tw (interpretant mal la datasheet \(vue de dessus, vue de dessous\).) Tj T* ET
-Q
+1 0 0 1 62.69291 104.4907 cm
 Q
 q
 1 0 0 1 56.69291 56.69291 cm
@@ -525,19 +581,71 @@ Q
  
 endstream
 endobj
-29 0 obj
-<< /Length 874 >>
+38 0 obj
+<< /Length 2899 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 717.0236 cm
+1 0 0 1 62.69291 750.0236 cm
+q
+BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (Montage) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 720.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.803735 Tw (Le montage a \351t\351 relativement facile. J'ai perdu du temps avec le c\342blage du capteur MLX90614 en) Tj T* 0 Tw (interpr\351tant mal la datasheet \(vue de dessus, vue de dessous\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 666.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .72856 Tw (Une des difficult\351s qui m'a fait perdre le plus de temps a \351t\351 un probl\350me avec le moteur de l'axe Y. Le) Tj T* 0 Tw .691654 Tw (signal de la sortie \(Y1B\) \351tait \351trange et le moteur ne faisait que des oscillations. Nous avons chang\351 le) Tj T* 0 Tw .663735 Tw (driver moteur \(A3967\) ce qui n'a pas r\351solu le probl\350me. J'ai finalement d\351couvert qu'une pin touchait le) Tj T* 0 Tw (blindage du connecteur USB de l'arduino - un probl\350me fr\351quent.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 717.0236 cm
+1 0 0 1 62.69291 639.0236 cm
+q
+BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (Temps de lecture) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 573.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL 3.074985 Tw (Au d\351but, j'ai essay\351 d'obtenir la vitesse de d\351placement la plus rapide afin de r\351duire le temps) Tj T* 0 Tw 3.24248 Tw (d'acquisition. Les premiers r\351sultats avaient une succession de valeurs identiques \(5,6 pixels\). Le) Tj T* 0 Tw 2.69784 Tw (probl\350me vient du temps de r\351action du capteur \(la datasheet n'en parle apparemment pas\). Pour) Tj T* 0 Tw 3.446651 Tw (r\351soudre le probl\350me, j'ai d\373 augmenter le temps entre les mesures \340 90ms. Ce delay rallonge) Tj T* 0 Tw (consid\351rablement le temps de mesure.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 546.0236 cm
+q
+BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (Deformation de l'image) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 516.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.744651 Tw (L'image est d\351form\351e pour plusieurs raisons. Tout d'abord, la distance entre deux points n'est pas la) Tj T* 0 Tw (m\352me \340 1m qu'\340 2m \( $x ~= distance*sin\(alpha\)$l'angle est identique\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 489.0236 cm
+q
+BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (Calibration) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 459.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .848626 Tw (Pour calibrer, j'ai utilis\351 le laser et des lignes sur le murs. Il y a une petite d\351rive \(perte de pas\) que j'ai) Tj T* 0 Tw (corrig\351 "en dure" dans le sketch arduino.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 459.0236 cm
 Q
 q
 1 0 0 1 56.69291 56.69291 cm
@@ -549,17 +657,17 @@ Q
  
 endstream
 endobj
-30 0 obj
-<< /Nums [ 0 31 0 R 1 32 0 R ] >>
+39 0 obj
+<< /Nums [ 0 40 0 R 1 41 0 R ] >>
 endobj
-31 0 obj
+40 0 obj
 << /S /D /St 1 >>
 endobj
-32 0 obj
+41 0 obj
 << /S /D /St 2 >>
 endobj
 xref
-0 33
+0 42
 0000000000 65535 f
 0000000075 00000 n
 0000000130 00000 n
@@ -577,27 +685,36 @@ xref
 0000019718 00000 n
 0000019890 00000 n
 0000020062 00000 n
-0000020185 00000 n
-0000020546 00000 n
-0000020756 00000 n
-0000020865 00000 n
-0000021076 00000 n
-0000021153 00000 n
-0000021293 00000 n
-0000021433 00000 n
-0000021550 00000 n
-0000021679 00000 n
-0000021791 00000 n
-0000021862 00000 n
-0000029285 00000 n
-0000030215 00000 n
-0000030268 00000 n
-0000030305 00000 n
+0000020234 00000 n
+0000020406 00000 n
+0000020578 00000 n
+0000020750 00000 n
+0000020922 00000 n
+0000021094 00000 n
+0000021217 00000 n
+0000021620 00000 n
+0000021830 00000 n
+0000021939 00000 n
+0000022150 00000 n
+0000022228 00000 n
+0000022368 00000 n
+0000022508 00000 n
+0000022625 00000 n
+0000022754 00000 n
+0000022879 00000 n
+0000023013 00000 n
+0000023153 00000 n
+0000023269 00000 n
+0000023340 00000 n
+0000031105 00000 n
+0000034061 00000 n
+0000034114 00000 n
+0000034151 00000 n
 trailer
 << /ID 
  % ReportLab generated PDF document -- digest (http://www.reportlab.com)
- [(\200o\273\226\272\377\325\250\276P\317x`\237\363\201) (\200o\273\226\272\377\325\250\276P\317x`\237\363\201)]
- /Info 20 0 R /Root 19 0 R /Size 33 >>
+ [(\272\016\242\026\234{\035\307u\340IV@]\277\270) (\272\016\242\026\234{\035\307u\340IV@]\277\270)]
+ /Info 26 0 R /Root 25 0 R /Size 42 >>
 startxref
-30342
+34188
 %%EOF

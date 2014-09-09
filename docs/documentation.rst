@@ -42,6 +42,12 @@ Temps de lecture
 
 Au début, j'ai essayé d'obtenir la vitesse de déplacement la plus rapide afin de réduire le temps d'acquisition. Les premiers résultats avaient une succession de valeurs identiques (5,6 pixels). Le problème vient du temps de réaction du capteur (la datasheet n'en parle apparemment pas). Pour résoudre le problème, j'ai dû augmenter le temps entre les mesures à 90ms. Ce delay rallonge considérablement le temps de mesure.
 
+Deformation de l'image
+-------------------------
+
+L'image est déformée pour plusieurs raisons. Tout d'abord, la distance entre deux points n'est pas la même à 1m qu'à 2m ( x ~= distance*tg(a) ce qui implique que x proportionnel à la distance). De plus si l'on est perpendiculaire à une surface la distance n'est pas la même au centre (leger effet oeil-de-boeuf). Si l'on mesure plusieurs sujets sur des plans diférents, leur résultion respective ne sera pas la même.
+
+Problème d'entrelacement
 
 Calibration
 ------------
