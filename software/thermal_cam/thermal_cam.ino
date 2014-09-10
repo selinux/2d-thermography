@@ -181,10 +181,10 @@ void loop(){
             Serial.print(tpl);
             
             /* debug test 10 times to be sur the MLX buffer s empty */
-            for(int u=0;u<10;u++){
-                  tpl = readMLXtemperature(1);
-                  delay(read_delay);
-            }
+//            for(int u=0;u<10;u++){
+//                  tpl = readMLXtemperature(1);
+//                  delay(read_delay);
+//            }
 
             
             /* Go one line down (motor up) */
@@ -194,7 +194,7 @@ void loop(){
 
         /* move back to origin and turn the laser off */
         step( (size_y/2), BW_Y, MOTY);
-        step( (size_x/2), BW_X, MOTX);
+        step( (size_x/2), FW_X, MOTX);
 
         start_scan = false;
 
